@@ -1,0 +1,92 @@
+/* OrderBook smooth transition animations */
+
+.orderbook-row {
+  transition: all 0.3s ease-in-out;
+}
+
+.orderbook-row.updating {
+  opacity: 0.95;
+  transform: scale(0.998);
+}
+
+.orderbook-bar {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left center;
+}
+
+.orderbook-bar.updating {
+  transform: scaleX(0.95);
+}
+
+.orderbook-price,
+.orderbook-shares,
+.orderbook-total {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Staggered animation delay for rows */
+.orderbook-row:nth-child(1) { animation-delay: 0ms; }
+.orderbook-row:nth-child(2) { animation-delay: 20ms; }
+.orderbook-row:nth-child(3) { animation-delay: 40ms; }
+.orderbook-row:nth-child(4) { animation-delay: 60ms; }
+.orderbook-row:nth-child(5) { animation-delay: 80ms; }
+.orderbook-row:nth-child(6) { animation-delay: 100ms; }
+.orderbook-row:nth-child(7) { animation-delay: 120ms; }
+.orderbook-row:nth-child(8) { animation-delay: 140ms; }
+.orderbook-row:nth-child(9) { animation-delay: 160ms; }
+.orderbook-row:nth-child(10) { animation-delay: 180ms; }
+
+/* Prevent layout shift during updates */
+.orderbook-container {
+  position: relative;
+  will-change: transform;
+}
+
+.orderbook-stable-spread {
+  position: sticky;
+  z-index: 30;
+  backdrop-filter: blur(8px);
+}
+
+/* Smooth bar width transitions */
+@keyframes barResize {
+  from {
+    transform: scaleX(0.8);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.orderbook-bar-animated {
+  animation: barResize 0.4s ease-out;
+}
+
+/* Fade in for new rows */
+@keyframes fadeInRow {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.orderbook-row-new {
+  animation: fadeInRow 0.3s ease-out;
+}
+
+/* Smooth opacity transitions */
+.orderbook-updating {
+  transition: opacity 0.15s ease-in-out;
+}
+
+.orderbook-updating.fade-out {
+  opacity: 0.7;
+}
+
+.orderbook-updating.fade-in {
+  opacity: 1;
+}

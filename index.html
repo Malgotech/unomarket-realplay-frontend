@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/icon" href="/unomarket.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=YOUR_FONT_FAMILY:wght@YOUR_WEIGHTS&display=swap"
+      rel="stylesheet" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Uno Market</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet" />
+    <!-- Prevent theme flash on page load -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      (function () {
+        // Check localStorage for theme preference
+        const savedTheme = localStorage.getItem("theme");
+        // Apply theme to body immediately
+        if (savedTheme === "dark") {
+          document.documentElement.style.backgroundColor = "#141414"; // Set background color immediately
+          document.body.className = "dark"; // Apply theme class
+        } else {
+          document.documentElement.style.backgroundColor = "#fdfdfd";
+          document.body.className = "light";
+        }
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
