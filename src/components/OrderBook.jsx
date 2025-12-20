@@ -270,7 +270,7 @@ const OrderBook = ({
   useEffect(() => {
     if (connectionStatus === "established" && lastUpdateTime) {
       // This is just to ensure the component re-renders with the latest data
-      const forceRender = () => { };
+      const forceRender = () => {};
       forceRender();
     } else if (connectionStatus === "established" && sseLastUpdateTime) {
       // Use SSE update time if our local state hasn't been set yet
@@ -313,7 +313,7 @@ const OrderBook = ({
       detail: {
         side:
           side ===
-            eventData?.sub_markets?.find((m) => m._id === marketId)?.side_1
+          eventData?.sub_markets?.find((m) => m._id === marketId)?.side_1
             ? eventData?.sub_markets?.find((m) => m._id === marketId)?.side_1
             : eventData?.sub_markets?.find((m) => m._id === marketId)?.side_2,
       },
@@ -398,7 +398,6 @@ const OrderBook = ({
       );
 
       if (response.success && response.markets && response.markets.length > 0) {
-
         // Transform new API format to old format expected by ActivityChart
         const transformedData = response.markets.map((market) => ({
           market_id: market.id,
@@ -482,7 +481,6 @@ const OrderBook = ({
           // Use the most recent resolution as preview
           setResolutionPreview(currentMarket.resolutions[0]);
         }
-
       } else {
         console.warn(`Market ID ${marketId} not found in event data`);
       }
@@ -748,14 +746,17 @@ const OrderBook = ({
           resolutionData.evidence_description || "Market resolution proposal",
       };
 
-      const response = await fetch('https://unoapi.unitythink.com/api/resolution/propose', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(payload)
-      });
+      const response = await fetch(
+        "https://api.uno.market/api/resolution/propose",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const data = await response.json();
 
@@ -791,65 +792,64 @@ const OrderBook = ({
 
   return (
     <div
-      className={`mt-6 border rounded-md   ${isDarkMode ? "border-zinc-700" : "border-zinc-200"
-        } overflow-hidden`}
-    >
+      className={`mt-6 border rounded-md   ${
+        isDarkMode ? "border-zinc-700" : "border-zinc-200"
+      } overflow-hidden`}>
       {/* Header with multiple tabs */}
       <div
         className={`flex cursor-pointer ${isDarkMode ? "" : ""}`}
-        onClick={showTitle ? toggleOrderBook : undefined}
-      >
+        onClick={showTitle ? toggleOrderBook : undefined}>
         {resolutionState != "final_resolution" && (
           <button
-            className={`py-2 px-4 text-center font-medium text-[18px] hover:cursor-pointer ${activeTab === "OrderBook"
-              ? isDarkMode
-                ? "text-zinc-100"
-                : "text-zinc-700"
-              : isDarkMode
+            className={`py-2 px-4 text-center font-medium text-[18px] hover:cursor-pointer ${
+              activeTab === "OrderBook"
+                ? isDarkMode
+                  ? "text-zinc-100"
+                  : "text-zinc-700"
+                : isDarkMode
                 ? "text-zinc-500"
                 : "text-zinc-400"
-              } transition-colors duration-300`}
+            } transition-colors duration-300`}
             onClick={(e) => {
               e.stopPropagation(); // Prevent toggleOrderBook if showTitle is true
               handleHeaderTabChange("OrderBook");
-            }}
-          >
+            }}>
             Order Book
           </button>
         )}
         {/* Graph Tab */}
         {(showTitle ? false : hasGraphData) && (
           <button
-            className={`py-2 px-4 text-center font-medium text-[18px] hover:cursor-pointer ${activeTab === "Graph"
-              ? isDarkMode
-                ? "text-zinc-100"
-                : "text-zinc-700"
-              : isDarkMode
+            className={`py-2 px-4 text-center font-medium text-[18px] hover:cursor-pointer ${
+              activeTab === "Graph"
+                ? isDarkMode
+                  ? "text-zinc-100"
+                  : "text-zinc-700"
+                : isDarkMode
                 ? "text-zinc-500"
                 : "text-zinc-400"
-              } transition-colors duration-300`}
+            } transition-colors duration-300`}
             onClick={(e) => {
               e.stopPropagation();
               handleHeaderTabChange("Graph");
-            }}
-          >
+            }}>
             Graph
           </button>
         )}
         <button
-          className={`py-2 px-4 text-center font-medium text-[18px] hover:cursor-pointer ${activeTab === "Resolution"
-            ? isDarkMode
-              ? "text-zinc-100"
-              : "text-zinc-700"
-            : isDarkMode
+          className={`py-2 px-4 text-center font-medium text-[18px] hover:cursor-pointer ${
+            activeTab === "Resolution"
+              ? isDarkMode
+                ? "text-zinc-100"
+                : "text-zinc-700"
+              : isDarkMode
               ? "text-zinc-500"
               : "text-zinc-400"
-            } transition-colors duration-300`}
+          } transition-colors duration-300`}
           onClick={(e) => {
             e.stopPropagation();
             handleHeaderTabChange("Resolution");
-          }}
-        >
+          }}>
           Resolution
         </button>
         {showTitle && (
@@ -858,17 +858,17 @@ const OrderBook = ({
             onClick={(e) => {
               e.stopPropagation();
               toggleOrderBook();
-            }}
-          >
+            }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={`h-4 w-4 ${isDarkMode ? "text-zinc-400" : "text-zinc-600"
-                } transform transition-transform duration-500 ${isOrderBookOpen ? "rotate-180" : "rotate-0"
-                }`}
+              className={`h-4 w-4 ${
+                isDarkMode ? "text-zinc-400" : "text-zinc-600"
+              } transform transition-transform duration-500 ${
+                isOrderBookOpen ? "rotate-180" : "rotate-0"
+              }`}
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+              stroke="currentColor">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -876,8 +876,6 @@ const OrderBook = ({
                 d="M19 9l-7 7-7-7"
               />
             </svg>
-
-         
           </div>
         )}
       </div>
@@ -885,48 +883,49 @@ const OrderBook = ({
       {/* Content based on active tab */}
       <div
         ref={contentRef}
-        className={`transition-all duration-500 ease-in-out overflow-hidden ${isDarkMode ? "" : ""
-          }`}
-      >
+        className={`transition-all duration-500 ease-in-out overflow-hidden ${
+          isDarkMode ? "" : ""
+        }`}>
         {activeTab === "OrderBook" && (
           <>
             {/* Trade Yes and Trade No Tabs */}
             <div
-              className={`flex border-b ${isDarkMode ? "border-zinc-800" : "border-zinc-200"
-                }`}
-            >
+              className={`flex border-b ${
+                isDarkMode ? "border-zinc-800" : "border-zinc-200"
+              }`}>
               <button
-                className={`py-3 px-6 text-center font-medium hover:cursor-pointer ${isDarkMode ? "text-[#fff]" : "text-[#000]"}  ${activeSide === getCurrentSides().side1
-                  ? " border-b-2 border-[#FF161A]"
-                  : "border-b-2 border-none"
-                  } transition-all duration-300`}
-                onClick={() => handleTabClick(getCurrentSides().side1)}
-              >
+                className={`py-3 px-6 text-center font-medium hover:cursor-pointer ${
+                  isDarkMode ? "text-[#fff]" : "text-[#000]"
+                }  ${
+                  activeSide === getCurrentSides().side1
+                    ? " border-b-2 border-[#FF161A]"
+                    : "border-b-2 border-none"
+                } transition-all duration-300`}
+                onClick={() => handleTabClick(getCurrentSides().side1)}>
                 Trade {getCurrentSides().side1}
               </button>
-             
 
-
-
-                  <button
-                className={`py-3 px-6 text-center font-medium hover:cursor-pointer ${isDarkMode ? "text-[#fff]" : "text-[#000]"}  ${activeSide === getCurrentSides().side2
-                  ? " border-b-2 border-[#FF161A]"
-                  :  "border-b-2 border-none"
-                  } transition-all duration-300`}
-                onClick={() => handleTabClick(getCurrentSides().side2)}
-              >
-                  Trade {getCurrentSides().side2}
+              <button
+                className={`py-3 px-6 text-center font-medium hover:cursor-pointer ${
+                  isDarkMode ? "text-[#fff]" : "text-[#000]"
+                }  ${
+                  activeSide === getCurrentSides().side2
+                    ? " border-b-2 border-[#FF161A]"
+                    : "border-b-2 border-none"
+                } transition-all duration-300`}
+                onClick={() => handleTabClick(getCurrentSides().side2)}>
+                Trade {getCurrentSides().side2}
               </button>
-
             </div>
 
             <div className={`relative ${isDarkMode ? "" : "bg-white"}`}>
               {/* Column Headers - Fixed Position */}
               <div
-                className={`grid grid-cols-6 gap-4 py-2 border-b ${isDarkMode ? "border-zinc-800 " : "border-zinc-200 bg-white"
-                  } font-medium ${isDarkMode ? "text-zinc-300" : "text-zinc-600"
-                  } sticky top-0 z-40`}
-              >
+                className={`grid grid-cols-6 gap-4 py-2 border-b ${
+                  isDarkMode ? "border-zinc-800 " : "border-zinc-200 bg-white"
+                } font-medium ${
+                  isDarkMode ? "text-zinc-300" : "text-zinc-600"
+                } sticky top-0 z-40`}>
                 <div></div>
                 <div></div>
                 <div></div>
@@ -937,12 +936,12 @@ const OrderBook = ({
 
               {/* Scrollable Order List */}
               <div
-                className={`orderbook-container max-h-[400px] overflow-y-auto scrollbar-hide relative ${sseIsUpdating
-                  ? "orderbook-updating fade-out"
-                  : "orderbook-updating fade-in"
-                  }`}
-                ref={scrollableContainerRef}
-              >
+                className={`orderbook-container max-h-[400px] overflow-y-auto scrollbar-hide relative ${
+                  sseIsUpdating
+                    ? "orderbook-updating fade-out"
+                    : "orderbook-updating fade-in"
+                }`}
+                ref={scrollableContainerRef}>
                 {(() => {
                   const { side1, side2 } = getCurrentSides();
                   const asks = orderBookData[activeSide]?.asks || [];
@@ -959,18 +958,20 @@ const OrderBook = ({
                           asks.map((ask, index) => (
                             <div
                               key={`ask-${ask.price}-${ask.shares}`}
-                              className={`orderbook-row grid grid-cols-6 gap-4 py-2 relative z-10 transition-all duration-300 ease-in-out transform ${sseIsUpdating
-                                ? "updating opacity-95 scale-[0.998]"
-                                : "opacity-100 scale-100"
-                                } ${isDarkMode
+                              className={`orderbook-row grid grid-cols-6 gap-4 py-2 relative z-10 transition-all duration-300 ease-in-out transform ${
+                                sseIsUpdating
+                                  ? "updating opacity-95 scale-[0.998]"
+                                  : "opacity-100 scale-100"
+                              } ${
+                                isDarkMode
                                   ? "hover:bg-[rgba(141,31,23,0.25)]"
                                   : "hover:bg-[rgba(141,31,23,0.15)]"
-                                } cursor-pointer ${isDarkMode ? "text-zinc-200" : ""
-                                }`}
+                              } cursor-pointer ${
+                                isDarkMode ? "text-zinc-200" : ""
+                              }`}
                               style={{
                                 animationDelay: `${index * 20}ms`,
-                              }}
-                            >
+                              }}>
                               {index === asks.length - 1 && (
                                 <div className="absolute bottom-2 left-2 z-20">
                                   <div className="w-[39px] h-[22px] bg-[#FF161A] rounded-[3px] flex items-center justify-center">
@@ -986,10 +987,12 @@ const OrderBook = ({
                                   backgroundColor: isDarkMode
                                     ? "#FF161A"
                                     : "#FF161A",
-                                  width: `${((ask.shares || 0) / maxShares) * 40
-                                    }%`,
-                                  transform: `scaleX(${sseIsUpdating ? 0.95 : 1
-                                    })`,
+                                  width: `${
+                                    ((ask.shares || 0) / maxShares) * 40
+                                  }%`,
+                                  transform: `scaleX(${
+                                    sseIsUpdating ? 0.95 : 1
+                                  })`,
                                   transformOrigin: "left center",
                                 }}
                               />
@@ -1015,9 +1018,9 @@ const OrderBook = ({
                           ))
                         ) : (
                           <div
-                            className={`grid grid-cols-6 gap-4 py-2 text-center relative ${isDarkMode ? "text-zinc-400" : "text-zinc-500"
-                              }`}
-                          >
+                            className={`grid grid-cols-6 gap-4 py-2 text-center relative ${
+                              isDarkMode ? "text-zinc-400" : "text-zinc-500"
+                            }`}>
                             <div className="col-span-6 font-medium">
                               No Asks
                             </div>
@@ -1027,13 +1030,14 @@ const OrderBook = ({
 
                       {/* Spread and Last Indicator Row */}
                       <div
-                        className={`py-2 flex justify-between items-center border-t border-b ${isDarkMode
-                          ? "border-zinc-800 text-zinc-400"
-                          : "border-zinc-200 text-zinc-500"
-                          } z-10 ${spreadPosition === "middle" ? "" : "invisible"
-                          }`}
-                        ref={spreadRowRef}
-                      >
+                        className={`py-2 flex justify-between items-center border-t border-b ${
+                          isDarkMode
+                            ? "border-zinc-800 text-zinc-400"
+                            : "border-zinc-200 text-zinc-500"
+                        } z-10 ${
+                          spreadPosition === "middle" ? "" : "invisible"
+                        }`}
+                        ref={spreadRowRef}>
                         <div></div>
                         <div></div>
                         <div></div>
@@ -1042,7 +1046,7 @@ const OrderBook = ({
                         <div>
                           Spread{" "}
                           {orderBookData.spreads &&
-                            typeof orderBookData.spreads[activeSide] === "number"
+                          typeof orderBookData.spreads[activeSide] === "number"
                             ? `${orderBookData.spreads[activeSide]}¢`
                             : "--"}
                         </div>
@@ -1059,18 +1063,20 @@ const OrderBook = ({
                           bids.map((bid, index) => (
                             <div
                               key={`bid-${bid.price}-${bid.shares}`}
-                              className={`orderbook-row   grid grid-cols-6 gap-4 py-2 relative z-10 transition-all duration-300 ease-in-out transform ${sseIsUpdating
-                                ? "updating opacity-95 scale-[0.998]"
-                                : "opacity-100 scale-100"
-                                } ${isDarkMode
+                              className={`orderbook-row   grid grid-cols-6 gap-4 py-2 relative z-10 transition-all duration-300 ease-in-out transform ${
+                                sseIsUpdating
+                                  ? "updating opacity-95 scale-[0.998]"
+                                  : "opacity-100 scale-100"
+                              } ${
+                                isDarkMode
                                   ? "hover:bg-[#95d3b1]"
                                   : "hover:bg-[#95d3b1]"
-                                } cursor-pointer ${isDarkMode ? "text-zinc-200" : ""
-                                }`}
+                              } cursor-pointer ${
+                                isDarkMode ? "text-zinc-200" : ""
+                              }`}
                               style={{
                                 animationDelay: `${index * 20}ms`,
-                              }}
-                            >
+                              }}>
                               {index === 0 && (
                                 <div className="absolute top-2 left-2 z-20  ">
                                   <div className="w-[39px] h-[22px] bg-[#009443] rounded-[3px] flex items-center justify-center">
@@ -1086,10 +1092,12 @@ const OrderBook = ({
                                   backgroundColor: isDarkMode
                                     ? "rgba(41, 140, 140, 0.40)"
                                     : "rgba(41, 140, 140, 0.30)",
-                                  width: `${((bid.shares || 0) / maxShares) * 40
-                                    }%`,
-                                  transform: `scaleX(${sseIsUpdating ? 0.95 : 1
-                                    })`,
+                                  width: `${
+                                    ((bid.shares || 0) / maxShares) * 40
+                                  }%`,
+                                  transform: `scaleX(${
+                                    sseIsUpdating ? 0.95 : 1
+                                  })`,
                                   transformOrigin: "left center",
                                 }}
                               />
@@ -1115,9 +1123,9 @@ const OrderBook = ({
                           ))
                         ) : (
                           <div
-                            className={`grid grid-cols-6 gap-4 py-2 text-center ${isDarkMode ? "text-zinc-400" : "text-zinc-500"
-                              }`}
-                          >
+                            className={`grid grid-cols-6 gap-4 py-2 text-center ${
+                              isDarkMode ? "text-zinc-400" : "text-zinc-500"
+                            }`}>
                             <div className="col-span-6 font-medium">
                               No Bids
                             </div>
@@ -1133,14 +1141,15 @@ const OrderBook = ({
               {spreadPosition !== "middle" && (
                 <div
                   ref={floatingSpreadRef}
-                  className={`absolute left-0 right-0 z-30 py-2 flex justify-between items-center ${spreadPosition === "top"
-                    ? "border-b top-[41px]"
-                    : "border-t bottom-0"
-                    } ${isDarkMode
+                  className={`absolute left-0 right-0 z-30 py-2 flex justify-between items-center ${
+                    spreadPosition === "top"
+                      ? "border-b top-[41px]"
+                      : "border-t bottom-0"
+                  } ${
+                    isDarkMode
                       ? "border-zinc-800 text-zinc-400 bg-zinc-900"
                       : "border-zinc-200 text-zinc-500 bg-white"
-                    } transition-all duration-200`}
-                >
+                  } transition-all duration-200`}>
                   <div></div>
                   <div></div>
                   <div></div>
@@ -1149,7 +1158,7 @@ const OrderBook = ({
                   <div>
                     Spread{" "}
                     {orderBookData.spreads &&
-                      typeof orderBookData.spreads[activeSide] === "number"
+                    typeof orderBookData.spreads[activeSide] === "number"
                       ? `${orderBookData.spreads[activeSide]}¢`
                       : "--"}
                   </div>
@@ -1166,9 +1175,9 @@ const OrderBook = ({
 
         {isOrderBookOpen && activeTab === "Graph" && hasGraphData && (
           <div
-            className={`mt-4 rounded-2xl shadow-none pt-4 pb-4 ${isDarkMode ? "text-zinc-300" : ""
-              }`}
-          >
+            className={`mt-4 rounded-2xl shadow-none pt-4 pb-4 ${
+              isDarkMode ? "text-zinc-300" : ""
+            }`}>
             {/* Debug data display */}
             {false && (
               <div className="bg-black text-white p-2 text-xs overflow-auto">
@@ -1180,10 +1189,10 @@ const OrderBook = ({
                       dataLength: localProbabilityData?.length || 0,
                       firstMarket: localProbabilityData?.[0]
                         ? {
-                          market_id: localProbabilityData[0].market_id,
-                          dataPoints:
-                            localProbabilityData[0].data?.length || 0,
-                        }
+                            market_id: localProbabilityData[0].market_id,
+                            dataPoints:
+                              localProbabilityData[0].data?.length || 0,
+                          }
                         : "none",
                     },
                     null,
@@ -1206,15 +1215,14 @@ const OrderBook = ({
 
         {isOrderBookOpen && activeTab === "Resolution" && (
           <div
-            className={`p-4 flex flex-col items-start justify-left overflow-visible ${isDarkMode ? "text-zinc-300" : ""
-              }`}
-          >
+            className={`p-4 flex flex-col items-start justify-left overflow-visible ${
+              isDarkMode ? "text-zinc-300" : ""
+            }`}>
             {resolutionState == "open" ? (
               // Show propose resolution button if resolution state is open
               <div
                 className="w-64 h-12 px-8 py-3 bg-[#FF532A] rounded-[5px] inline-flex justify-center items-center gap-2.5 cursor-pointer"
-                onClick={() => setShowResolutionDialog(true)}
-              >
+                onClick={() => setShowResolutionDialog(true)}>
                 <div className="justify-center text-white text-base font-medium">
                   Propose Solution
                 </div>

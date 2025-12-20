@@ -18,7 +18,7 @@ import { styled } from "@mui/material/styles";
 import { FiEye, FiEyeOff, FiArrowLeft } from "react-icons/fi";
 import api from "../../services/api";
 import { useDispatch, useSelector } from "react-redux";
- 
+
 import loginbg from "../../../public/loginbg.png";
 import metamask from "../../images/metamask.svg";
 import walletConnect from "../../images/wallet-connect.svg";
@@ -41,8 +41,6 @@ import Toast from "../Toast";
 
 import logoDark from "../../images/unologo.svg";
 import logoLight from "../../images/unologo-dark.svg";
-
- 
 
 // import { IoClose } from "react-icons/io5";
 
@@ -254,14 +252,17 @@ const LoginDialog = ({ open, onClose, onLoginSuccess }) => {
     setIsLoading(true);
     try {
       const didToken = await magic.auth.loginWithEmailOTP({ email });
-      const response = await fetch("https://unoapi.unitythink.com/api/user/verifyotp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + didToken,
-        },
-        body: JSON.stringify({ email }),
-      });
+      const response = await fetch(
+        "https://api.uno.market/api/user/verifyotp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + didToken,
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
       const data = await response.json();
       if (data.status) {
         localStorage.setItem("UnomarketToken", data.data.token);
@@ -742,10 +743,10 @@ Timestamp: ${new Date().toISOString()}
           {/* </div> */}
           <div className="d-flex relative justify-evenly align-center flex-column w-full    h-auto">
             <img
-                src={isDarkMode ?  logoLight: logoDark}
-                alt="Soundbet Logo"
-                style={{ width: "120px" }}
-              />
+              src={isDarkMode ? logoLight : logoDark}
+              alt="Soundbet Logo"
+              style={{ width: "120px" }}
+            />
             <IoMdClose
               onClick={onClose}
               className={`absolute top-0 right-0 z-10  ${
@@ -763,43 +764,38 @@ Timestamp: ${new Date().toISOString()}
                   alignItems: "center",
                   width: "100%",
                   gap: "20px",
-                  marginTop:"20px"
+                  marginTop: "20px",
                 }}>
                 <div className="h-[25px] justify-start text-[color:var(--font-color)] text-2xl font-semibold mb-[18px]">
                   Glad you're back!
                 </div>
 
-
                 <div className="w-full h-auto flex flex-col items-center justify-center gap-2">
+                  <div
+                    className="w-full h-[54px] border-x border border-[#AEAEAE] rounded-[12px] flex items-center px-4"
+                    style={{ background: isDarkMode ? "#2C2C2C" : "#fff" }}>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={handleEmailChange}
+                      placeholder="Email Address"
+                      className="w-full h-full outline-none text-[color:var(--font-color)] bg-transparent"
+                      onClick={(e) => e.stopPropagation()}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.stopPropagation();
+                          handleLogin();
+                        }
+                      }}
+                    />
+                  </div>
 
-
-                <div
-                  className="w-full h-[54px] border-x border border-[#AEAEAE] rounded-[12px] flex items-center px-4"
-                  style={{ background: isDarkMode ? "#2C2C2C" : "#fff" }}>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                    placeholder="Email Address"
-                    className="w-full h-full outline-none text-[color:var(--font-color)] bg-transparent"
-                    onClick={(e) => e.stopPropagation()}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.stopPropagation();
-                        handleLogin();
-                      }
-                    }}
-                  />
+                  {errorMessage && (
+                    <span className="text-[16px] text-red-500">
+                      {errorMessage}
+                    </span>
+                  )}
                 </div>
-
-                {errorMessage && (
-                  <span className="text-[16px] text-red-500">
-                    {errorMessage}
-                  </span>
-                )}
-
-                </div>
-
 
                 <div
                   className="w-full py-3 bg-[#FF4215] rounded-full inline-flex justify-center items-center gap-[9px] overflow-hidden cursor-pointer"
@@ -985,12 +981,11 @@ Timestamp: ${new Date().toISOString()}
                   </div>
 
                   <div
-                     className="px-8 py-3 bg-[#FF4215] rounded inline-flex justify-center items-center gap-[9px] overflow-hidden cursor-pointer"
+                    className="px-8 py-3 bg-[#FF4215] rounded inline-flex justify-center items-center gap-[9px] overflow-hidden cursor-pointer"
                     onClick={() => {
                       if (onLoginSuccess) onLoginSuccess();
                       onClose();
-                    }}
-                   >
+                    }}>
                     <div className="justify-center text-[#fcfcfc] text-sm font-medium">
                       Skip for Now
                     </div>

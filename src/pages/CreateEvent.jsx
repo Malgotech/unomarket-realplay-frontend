@@ -9,8 +9,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import DepositDialog from "../components/payments/DepositDialog";
 import WithdrawDialog from "../components/payments/WithdrawDialog";
 import ProfitLossChart from "../components/ProfitLossChart";
- 
- 
+
 import GenerateEvent from "./GenerateEvent";
 
 import NewEventComponent from "./EventsForm";
@@ -99,7 +98,7 @@ const cancelOrder = async (orderId) => {
 const sellPosition = async (position, quantity) => {
   try {
     // Call the sell API endpoint
-    const response = await fetch("https://unoapi.unitythink.com/orders/market/sell", {
+    const response = await fetch("https://api.uno.market/orders/market/sell", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -129,7 +128,7 @@ const sellPosition = async (position, quantity) => {
 
 const CreateEvent = () => {
   const navigate = useNavigate();
- 
+
   const [grokPreviewIdx, setGrokPreviewIdx] = useState(null);
   const [grokResults, setGrokResults] = useState([]);
   const theme = useSelector((state) => state.theme.value); // Get current theme
@@ -214,8 +213,6 @@ const CreateEvent = () => {
   const [withdrawLoading, setWithdrawLoading] = useState(false);
   const [generateOpen, setGenerateOpen] = useState(false);
   const [activeButton, setActiveButton] = useState(false);
-
-
 
   // Handler for withdraw action
   const handleWithdraw = async (address, amount) => {
@@ -1555,8 +1552,6 @@ const CreateEvent = () => {
 
   return (
     <>
-  
-
       <div
         className={`profile-page min-h-screen ${
           isDarkMode ? "bg-[#121212]" : ""

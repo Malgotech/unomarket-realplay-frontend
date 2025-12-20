@@ -95,21 +95,18 @@ const cancelOrder = async (orderId) => {
 const sellPosition = async (position, quantity) => {
   try {
     // Call the sell API endpoint
-    const response = await fetch(
-      "https://unoapi.unitythink.com/orders/market/sell",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          event_id: position.eventId,
-          market_id: position.marketId,
-          side: position.side,
-          shares: quantity,
-        }),
-      }
-    );
+    const response = await fetch("https://api.uno.market/orders/market/sell", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        event_id: position.eventId,
+        market_id: position.marketId,
+        side: position.side,
+        shares: quantity,
+      }),
+    });
 
     const data = await response.json();
     return {
@@ -1606,39 +1603,35 @@ const Profile = () => {
                         </div>
                       </div> */}
 
-
-
-                           <div
+                      <div
                         className={`rounded outline-[1.20px] outline-offset-[-1.20px] outline-[#FF532A] inline-flex justify-center items-center gap-[9px] overflow-hidden cursor-pointer ${
                           isDarkMode
                             ? "hover:bg-[#FF532A]"
                             : "hover:bg-[#FF532A]"
                         } transition-colors duration-300 ease-in-out hover:text-white`}
-                      onClick={() => setDepositOpen(true)}>
+                        onClick={() => setDepositOpen(true)}>
                         <div
                           className={`px-[18px] py-[8px] justify-center  text-sm font-medium group-hover:text-white transition-colors duration-300 ease-in-out hover:text-white ${
                             isDarkMode ? "text-[#fff]" : "text-[#000]"
                           }`}>
-                        Deposit
+                          Deposit
                         </div>
                       </div>
 
-
-                        <div
+                      <div
                         className={`rounded outline-[1.20px] outline-offset-[-1.20px] outline-[#FF532A] inline-flex justify-center items-center gap-[9px] overflow-hidden cursor-pointer ${
                           isDarkMode
                             ? "hover:bg-[#FF532A]"
                             : "hover:bg-[#FF532A]"
                         } transition-colors duration-300 ease-in-out hover:text-white`}
-                       onClick={() => setWithdrawOpen(true)}>
+                        onClick={() => setWithdrawOpen(true)}>
                         <div
                           className={`px-[18px] py-[8px] justify-center  text-sm font-medium group-hover:text-white transition-colors duration-300 ease-in-out hover:text-white ${
                             isDarkMode ? "text-[#fff]" : "text-[#000]"
                           }`}>
-                       Withdraw
+                          Withdraw
                         </div>
                       </div>
-
 
                       <div
                         className={`rounded outline-[1.20px] outline-offset-[-1.20px] outline-[#FF532A] inline-flex justify-center items-center gap-[9px] overflow-hidden cursor-pointer ${

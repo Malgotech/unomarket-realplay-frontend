@@ -1,8 +1,7 @@
 import api from "./api";
 
 // Generalized function to fetch data from any endpoint
-let baseURL = "https://unoapi.unitythink.com";
-
+let baseURL = "https://api.uno.market";
 
 export const fetchData = async (endpoint, data = null) => {
   try {
@@ -57,7 +56,6 @@ export const postData = async (endpoint, data, isFormData = false) => {
         timeout: 30000, // 30 second timeout for file uploads
       }),
     };
-
 
     const response = await api.post(`${baseURL}/${endpoint}`, data, config);
     return response.data;
@@ -128,8 +126,6 @@ export const withdrawFunds = async (address, amount) => {
   return postData("withdraws", { address, amount });
 };
 
-
-
 export const createEvent = async (eventData) => {
   try {
     // Ensure we're using 'markets' instead of 'sub_markets' for consistency with API
@@ -160,7 +156,6 @@ export const createEvent = async (eventData) => {
     throw error;
   }
 };
-
 
 export const uploadFile = async (file, fileType = "image") => {
   try {

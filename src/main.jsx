@@ -9,7 +9,7 @@ import { WagmiProvider, createConfig, http } from "wagmi";
 import { bsc, mainnet, polygon, sepolia } from "viem/chains"; // Add chains as needed
 import { injected, walletConnect } from "@wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
 
 // Create a QueryClient for React Query
 const queryClient = new QueryClient();
@@ -24,14 +24,14 @@ const wagmiConfig = defaultWagmiConfig({
   metadata: {
     name: "UnoMarket",
     description: "UnoMarket Prediction Platform",
-    url: "https://unomarket.com",
-    icons: ["https://unomarket.com/favicon.ico"],
+    url: "https://uno.market",
+    icons: ["https://uno.market/favicon.ico"],
   },
 });
 createWeb3Modal({
   wagmiConfig,
   projectId,
-  themeMode: "light", // or 'dark'
+  themeMode: "light",
   enableAnalytics: false,
 });
 createRoot(document.getElementById("root")).render(

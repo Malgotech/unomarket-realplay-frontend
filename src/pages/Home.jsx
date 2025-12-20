@@ -280,7 +280,6 @@ const Home = ({ addPosition, setAddPositon, setAddBookMark, addBookmark }) => {
     setShowPanel(!showPanel);
   };
 
-
   const handleCardClick = (item) => {
     // Only navigate if trading panel is not showing
     if (!showTradingPanel) {
@@ -442,7 +441,6 @@ const Home = ({ addPosition, setAddPositon, setAddBookMark, addBookmark }) => {
     );
   };
 
-
   return (
     <>
       {/* Removed overflow-x-hidden to prevent right-side shadow clipping (e.g., TwitterTrend card) */}
@@ -475,7 +473,7 @@ const Home = ({ addPosition, setAddPositon, setAddBookMark, addBookmark }) => {
             )}
 
             {!loading && (
-              <div className="w-full flex justify-start items-center gap-2">  
+              <div className="w-full flex justify-start items-center gap-2">
                 <button
                   onClick={() => handleClick("forYou")}
                   className={`w-fit h-8 px-3 text-sm font-semibold rounded-full
@@ -1066,19 +1064,19 @@ const Home = ({ addPosition, setAddPositon, setAddBookMark, addBookmark }) => {
                   <SkeletonCard />
                   <SkeletonCard />
                   <SkeletonCard />
-                     <SkeletonCard />
+                  <SkeletonCard />
                 </div>
                 <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-5 ml-1">
                   <SkeletonCard />
                   <SkeletonCard />
                   <SkeletonCard />
-                     <SkeletonCard />
+                  <SkeletonCard />
                 </div>
                 <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-5 ml-1">
                   <SkeletonCard />
                   <SkeletonCard />
                   <SkeletonCard />
-                     <SkeletonCard />
+                  <SkeletonCard />
                 </div>
               </div>
             )}
@@ -1235,7 +1233,6 @@ const Home = ({ addPosition, setAddPositon, setAddBookMark, addBookmark }) => {
                           setAddBookMark={setAddBookMark}
                           showLimit={showLimit}
                           setShowLimit={setShowLimit}
-                        
                         />
                       ) : (
                         <QuestionPieChart
@@ -1248,7 +1245,6 @@ const Home = ({ addPosition, setAddPositon, setAddBookMark, addBookmark }) => {
                           showLimit={showLimit}
                           setShowLimit={setShowLimit}
                         />
-                        
                       )}
                     </div>
                   );
@@ -1302,12 +1298,12 @@ const Home = ({ addPosition, setAddPositon, setAddBookMark, addBookmark }) => {
           <Footer />
         </div>
 
-        {/* <HowPlay
+        <HowPlay
           open={playModal}
           handleClose={() => setPlayModal(false)}
           showMethod={showMethod}
           setShowMethod={setShowMethod}
-        /> */}
+        />
       </div>
     </>
   );

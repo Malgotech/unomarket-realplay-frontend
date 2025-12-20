@@ -60,12 +60,16 @@ function SlideContent({ img, title, desc, isDarkMode, isLast, setShowMethod }) {
   );
 }
 
-export default function HowPlay({ open, handleClose , setShowMethod,showMethod }) {
+export default function HowPlay({
+  open,
+  handleClose,
+  setShowMethod,
+  showMethod,
+}) {
   const themeMode = useSelector((state) => state.theme.value);
   const isDarkMode = themeMode === "dark";
 
- 
-  const [playMethod, setPlayMethod] = React.useState( );
+  const [playMethod, setPlayMethod] = React.useState();
 
   const slides = [
     {
@@ -90,18 +94,22 @@ export default function HowPlay({ open, handleClose , setShowMethod,showMethod }
     },
   ];
 
- 
-
-  const handleSelectMethod = (item, mode) => {
-    setPlayMethod(item);
-    localStorage.setItem("playmode", item);
+  const handleSelectMethod = (item) => {
+    if (item == "real") {
+      setPlayMethod(item);
+      localStorage.setItem("playmode", item);
+      handleClose();
+    } else {
+      window.open("https://fun.uno.market");
+      handleClose();
+    }
   };
 
   const handleModalClose = () => {
     handleClose();
 
     setTimeout(() => {
-    setShowMethod(false);      
+      setShowMethod(false);
     }, 1000);
   };
 
@@ -157,7 +165,7 @@ export default function HowPlay({ open, handleClose , setShowMethod,showMethod }
                 className={`w-[150px] h-[150px] rounded-[12px] border-4 border-[#E6E6E6] flex flex-col items-center justify-center gap-4 ${
                   isDarkMode ? "bg-[#fff]" : ""
                 } ${playMethod == "fun" ? "border-[#FF4215]" : ""} `}
-                onClick={() => handleSelectMethod("fun", "fun")}>
+                onClick={() => handleSelectMethod("fun")}>
                 <img src={funImg} alt="fun" width={100} height={100} />
 
                 <p className="text-[#000] font-bold">Fun</p>
@@ -167,18 +175,18 @@ export default function HowPlay({ open, handleClose , setShowMethod,showMethod }
                 className={`w-[150px] h-[150px] rounded-[12px] border-4 border-[#E6E6E6] flex flex-col items-center justify-center gap-4 ${
                   isDarkMode ? "bg-[#fff]" : ""
                 } ${playMethod == "real" ? "border-[#FF4215]" : ""} `}
-                onClick={() => handleSelectMethod("real", "real")}>
+                onClick={() => handleSelectMethod("real")}>
                 <img src={realImg} alt="real" width={100} height={100} />
 
                 <p className="text-[#000] font-bold">Real</p>
               </button>
             </div>
 
-            <button
+            {/* <button
               onClick={handleModalClose}
               className="mt-6 w-[200px] h-10 bg-[#FF4215] rounded-full text-[16px] font-normal text-white hover:bg-[#ff532a] transition-colors">
               Get Started
-            </button>
+            </button> */}
           </div>
         ) : (
           <Swiper

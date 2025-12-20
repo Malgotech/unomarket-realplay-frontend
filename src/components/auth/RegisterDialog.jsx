@@ -252,7 +252,7 @@ const RegisterDialog = ({ open, onClose }) => {
       // console.log("email :>> ", email);
       const didToken = await magic.auth.loginWithEmailOTP({ email });
       const response = await fetch(
-        "https://unoapi.unitythink.com/api/user/verifyotp",
+        "https://api.uno.market/api/user/verifyotp",
         {
           method: "POST",
           headers: {
@@ -441,7 +441,7 @@ const RegisterDialog = ({ open, onClose }) => {
     try {
       await magic.oauth2.loginWithPopup({
         provider: "google",
-        redirectURI: "https://unoapi.unitythink.com",
+        redirectURI: "https://api.uno.market",
         scope: ["profile", "email"],
       });
       const result = await magic.user.getInfo();
@@ -617,7 +617,6 @@ Timestamp: ${new Date().toISOString()}
         signature,
         message,
       });
-
 
       if (response.status) {
         localStorage.setItem("UnomarketToken", response.data.token);
