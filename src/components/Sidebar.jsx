@@ -8,8 +8,8 @@ const Sidebar = () => {
   const theme = useSelector((state) => state.theme.value);
   const isDarkMode = theme === "dark";
   const location = useLocation();
-          const isLogin = useSelector((state) => state.user.isLogin);
-  
+  const isLogin = useSelector((state) => state.user.isLogin);
+
 
   useEffect(() => {
     const currentPath = location.pathname;
@@ -24,7 +24,7 @@ const Sidebar = () => {
       setActiveItem("activity");
     } else if (currentPath === "/bookmarks") {
       setActiveItem("bookmark");
-    } else if (currentPath === "/dashboard") {
+    } else if (currentPath === "/profile") {
       setActiveItem("profile");
     } else {
       setActiveItem("home");
@@ -56,7 +56,7 @@ const Sidebar = () => {
     { id: "marketideas", icon: "/market-ideas.svg", label: "Market Ideas", path: "/thoughts/market-ideas" },
     { id: "activity", icon: "/Streamline Graph.svg", label: "Activity", path: "/activity" },
     // { id: "bookmark", icon: "/bookmarkIcon.svg", label: "Bookmark", path: "/bookmarks" },
-    { id: "profile", icon: "/profileIcon.svg", label: "Profile", path: "/dashboard" },
+    { id: "profile", icon: "/profileIcon.svg", label: "Profile", path: "/profile" },
   ];
 
   const handleMenuItemClick = (item, event) => {

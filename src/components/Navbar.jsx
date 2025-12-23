@@ -687,7 +687,7 @@ const Navbar = () => {
   const handleMobileSignup = () => {
     closeMobileMenu(); // Close the mobile menu first
     setRegisterDialogOpen(true); // Open register dialog
-    handleSignUpClick({ preventDefault: () => {} }); // Open signup dialog
+    handleSignUpClick({ preventDefault: () => { } }); // Open signup dialog
   };
 
   // Close settings menu when clicking outside
@@ -712,13 +712,11 @@ const Navbar = () => {
 
   return (
     <header
-      className={`w-full border-b flex flex-col lg:flex-row justify-center items-center ${
-        isDarkMode ? "border-zinc-800" : "border-gray-200"
-      } fixed top-0 z-[100] ${isDarkMode ? "bg-[#09090b]" : "bg-[#FFFFFF]"} ${
-        isDarkMode
+      className={`w-full border-b flex flex-col lg:flex-row justify-center items-center ${isDarkMode ? "border-zinc-800" : "border-gray-200"
+        } fixed top-0 z-[100] ${isDarkMode ? "bg-[#09090b]" : "bg-[#FFFFFF]"} ${isDarkMode
           ? "shadow-[0px_4px_12px_0px_rgba(0,0,0,0.5)]"
           : "shadow-[0px_4px_12px_0px_rgba(137,137,137,0.25)]"
-      } max-[1100px]:h-auto min-[1101px]:h-28 transition-all duration-300`}>
+        } max-[1100px]:h-auto min-[1101px]:h-28 transition-all duration-300`}>
       <Toast
         message={toastMessage}
         show={showToast}
@@ -726,9 +724,8 @@ const Navbar = () => {
       />
 
       <div
-        className={`container w-full mx-0 px-4  ${
-          isDarkMode ? "bg-[#09090b]" : "bg-[#FFFFFF]"
-        } max-w-[1350px] transition-all duration-300`}>
+        className={`container w-full mx-0 px-4  ${isDarkMode ? "bg-[#09090b]" : "bg-[#FFFFFF]"
+          } max-w-[1350px] transition-all duration-300`}>
         {/* Desktop Navigation */}
         <div className="max-[1100px]:hidden h-full flex flex-col justify-center">
           {/* Top Navigation Row */}
@@ -743,60 +740,52 @@ const Navbar = () => {
                   <img
                     src={isDarkMode ? logoLight : logoDark}
                     alt="soundbet"
-                    className={`h-[36px] transition-all duration-300 ${
-                      logosLoaded ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`h-[36px] transition-all duration-300 ${logosLoaded ? "opacity-100" : "opacity-0"
+                      }`}
                     style={{ minWidth: "80px" }}
                     loading="eager"
                   />
                   {!logosLoaded && (
                     <div
-                      className={`absolute h-[26px] ${
-                        isDarkMode ? "bg-zinc-700" : "bg-gray-300"
-                      } rounded animate-pulse`}
+                      className={`absolute h-[26px] ${isDarkMode ? "bg-zinc-700" : "bg-gray-300"
+                        } rounded animate-pulse`}
                       style={{ minWidth: "80px" }}
                     />
                   )}
                 </div>
               </div>
               <nav
-                className={`ml-4 flex items-center gap-3 text-[16px] ${
-                  isDarkMode ? "text-zinc-300" : "text-zinc-600"
-                }`}
+                className={`ml-4 flex items-center gap-3 text-[16px] ${isDarkMode ? "text-zinc-300" : "text-zinc-600"
+                  }`}
                 style={{ minWidth: "200px" }}>
                 <button
-                  className={`transition-all duration-300 text-sm text-[#FF3366] font-bold hover:text-[#FF6699] hover:scale-105 px-2 py-1 rounded-md ${
-                    isDarkMode ? "hover:bg-zinc-800/50" : "hover:bg-blue-50"
-                  }`}>
+                  className={`transition-all duration-300 text-sm text-[#FF3366] font-bold hover:text-[#FF6699] hover:scale-105 px-2 py-1 rounded-md ${isDarkMode ? "hover:bg-zinc-800/50" : "hover:bg-blue-50"
+                    }`}>
                   Live
                 </button>
                 <button
                   onClick={() => handleMainTabClick("Markets")}
-                  className={`transition-all duration-300 text-sm  hover:cursor-pointer px-2 py-1 rounded-md ${
-                    isMainTabActive("Markets")
+                  className={`transition-all duration-300 text-sm  hover:cursor-pointer px-2 py-1 rounded-md ${isMainTabActive("Markets")
                       ? "text-white bg-[#FF161A] font-bold shadow-lg"
-                      : `font-medium ${
-                          isDarkMode
-                            ? "text-[#C5C5C5] hover:bg-zinc-800/50"
-                            : "text-zinc-700 hover:bg-blue-50"
-                        }`
-                  }`}>
+                      : `font-medium ${isDarkMode
+                        ? "text-[#C5C5C5] hover:bg-zinc-800/50"
+                        : "text-zinc-700 hover:bg-blue-50"
+                      }`
+                    }`}>
                   Markets
                 </button>
                 <button
                   onClick={() => handleMainTabClick("Thoughts")}
-                  className={`transition-all duration-300 text-sm hover:cursor-pointer px-2 py-1 rounded-md ${
-                    isMainTabActive("Thoughts")
+                  className={`transition-all duration-300 text-sm hover:cursor-pointer px-2 py-1 rounded-md ${isMainTabActive("Thoughts")
                       ? "text-white bg-[#FF161A] font-bold shadow-lg"
-                      : `font-medium ${
-                          isDarkMode
-                            ? "text-[#C5C5C5] hover:bg-zinc-800/50"
-                            : "text-zinc-700 hover:bg-blue-50"
-                        }`
-                  }`}>
+                      : `font-medium ${isDarkMode
+                        ? "text-[#C5C5C5] hover:bg-zinc-800/50"
+                        : "text-zinc-700 hover:bg-blue-50"
+                      }`
+                    }`}>
                   Idea
                 </button>
-                <button
+                {/* <button
                   onClick={() => handleEvent("Thoughts")}
                   className={`
     animate-zoomGlow
@@ -806,7 +795,7 @@ const Navbar = () => {
     ${isMainTabActive("Thoughts") ? "font-bold shadow-lg" : "font-medium"}
   `}>
                   Create Events
-                </button>
+                </button> */}
               </nav>
             </div>
 
@@ -823,11 +812,10 @@ const Navbar = () => {
                   value={query}
                   type="text"
                   placeholder="Search Events & Market Trends"
-                  className={`border w-[300px] h-10 rounded-lg transition-all duration-300 ${
-                    isDarkMode
+                  className={`border w-[300px] h-10 rounded-lg transition-all duration-300 ${isDarkMode
                       ? "bg-[#141414] border-zinc-700 text-[#C5C5C5] focus:ring-2 focus:ring-[#5B8BF7]"
                       : "bg-white border-zinc-300 text-zinc-700 focus:ring-2 focus:ring-[#4169E1]"
-                  } px-11 text-[16px] focus:outline-none focus:border-transparent shadow-sm`}
+                    } px-11 text-[16px] focus:outline-none focus:border-transparent shadow-sm`}
                   onFocus={() => {
                     if (searchResults.length > 0) {
                       setShowSearchResults(true);
@@ -848,20 +836,17 @@ const Navbar = () => {
                 {showSearchResults && (
                   <div
                     ref={searchResultsRef}
-                    className={`w-[300px] absolute top-full mt-[6px] ${
-                      isDarkMode ? "bg-[#232429]" : "bg-white"
-                    } rounded-lg shadow-xl border ${
-                      isDarkMode ? "border-zinc-700" : "border-gray-200"
-                    } overflow-hidden z-50 transition-all duration-300`}>
+                    className={`w-[300px] absolute top-full mt-[6px] ${isDarkMode ? "bg-[#232429]" : "bg-white"
+                      } rounded-lg shadow-xl border ${isDarkMode ? "border-zinc-700" : "border-gray-200"
+                      } overflow-hidden z-50 transition-all duration-300`}>
                     {isSearching ? (
                       <div className="flex items-center justify-center py-10">
                         <div className="w-5 h-5 border-t-2 border-[#4169E1] rounded-full animate-spin"></div>
                       </div>
                     ) : searchResults.length === 0 ? (
                       <div
-                        className={`py-10 text-center ${
-                          isDarkMode ? "text-zinc-500" : "text-[#2b2d2e]/50"
-                        } text-sm font-normal`}>
+                        className={`py-10 text-center ${isDarkMode ? "text-zinc-500" : "text-[#2b2d2e]/50"
+                          } text-sm font-normal`}>
                         No results found
                       </div>
                     ) : (
@@ -871,11 +856,10 @@ const Navbar = () => {
                           {searchResults.map((event, index) => (
                             <div
                               key={event._id}
-                              className={`search-result-item flex items-center p-3 transition-all duration-200 ${
-                                isDarkMode
+                              className={`search-result-item flex items-center p-3 transition-all duration-200 ${isDarkMode
                                   ? "hover:bg-[#2D2E33]"
                                   : "hover:bg-blue-50"
-                              } cursor-pointer`}
+                                } cursor-pointer`}
                               onClick={() => {
                                 navigate(`/market/details/${event._id}`);
                               }}
@@ -902,11 +886,10 @@ const Navbar = () => {
                               {/* Market name with ellipsis */}
                               <div className="flex-grow min-w-0">
                                 <div
-                                  className={`${
-                                    isDarkMode
+                                  className={`${isDarkMode
                                       ? "text-[#C5C5C5]"
                                       : "text-[#2b2d2e]"
-                                  } text-[14px] font-normal truncate`}>
+                                    } text-[14px] font-normal truncate`}>
                                   {event.event_title}
                                 </div>
                               </div>
@@ -935,11 +918,10 @@ const Navbar = () => {
                                     return (
                                       <>
                                         <div
-                                          className={`text-[14px] font-bold ${
-                                            isDarkMode
+                                          className={`text-[14px] font-bold ${isDarkMode
                                               ? "text-white"
                                               : "text-[#4169E1]"
-                                          }`}>
+                                            }`}>
                                           {event.sub_markets[submarketIndex]
                                             .lastTradedYesPrice
                                             ? `${event.sub_markets[submarketIndex].lastTradedYesPrice}%`
@@ -947,23 +929,22 @@ const Navbar = () => {
                                         </div>
                                         {event.sub_markets[submarketIndex]
                                           ?.name && (
-                                          <div className="text-[11px] text-zinc-500 truncate">
-                                            {
-                                              event.sub_markets[submarketIndex]
-                                                .name
-                                            }
-                                          </div>
-                                        )}
+                                            <div className="text-[11px] text-zinc-500 truncate">
+                                              {
+                                                event.sub_markets[submarketIndex]
+                                                  .name
+                                              }
+                                            </div>
+                                          )}
                                       </>
                                     );
                                   })()
                                 ) : (
                                   <div
-                                    className={`text-[14px] font-bold ${
-                                      isDarkMode
+                                    className={`text-[14px] font-bold ${isDarkMode
                                         ? "text-white"
                                         : "text-[#4169E1]"
-                                    }`}>
+                                      }`}>
                                     {event.sub_markets[0].lastTradedYesPrice
                                       ? `${event.sub_markets[0].lastTradedYesPrice}%`
                                       : "--"}
@@ -986,16 +967,14 @@ const Navbar = () => {
                   onClick={() => setShowRegionDropdown(!showRegionDropdown)}
                   className="flex items-center gap-1 cursor-pointer transition-all duration-200 hover:opacity-80">
                   <span
-                    className={`text-[14px] font-medium ${
-                      isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
-                    }`}>
+                    className={`text-[14px] font-medium ${isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
+                      }`}>
                     {selectedRegion}
                   </span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`w-3 h-3 transition-transform ${
-                      isDarkMode ? "text-[#C5C5C5]" : ""
-                    } ${showRegionDropdown ? "rotate-180" : ""}`}
+                    className={`w-3 h-3 transition-transform ${isDarkMode ? "text-[#C5C5C5]" : ""
+                      } ${showRegionDropdown ? "rotate-180" : ""}`}
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -1010,26 +989,22 @@ const Navbar = () => {
                 {showRegionDropdown && (
                   <div
                     ref={regionDropdownRef}
-                    className={`absolute top-full mt-1 w-[130px] ${
-                      isDarkMode ? "bg-[#232429]" : "bg-white"
-                    } rounded-lg shadow-xl py-0 z-[1000] transition-all duration-300 border ${
-                      isDarkMode ? "border-zinc-700" : "border-gray-200"
-                    }`}>
+                    className={`absolute top-full mt-1 w-[130px] ${isDarkMode ? "bg-[#232429]" : "bg-white"
+                      } rounded-lg shadow-xl py-0 z-[1000] transition-all duration-300 border ${isDarkMode ? "border-zinc-700" : "border-gray-200"
+                      }`}>
                     {regions.map((region) => (
                       <div
                         key={region}
-                        className={`transition-all duration-200 ${
-                          isDarkMode ? "hover:bg-[#2D2E33]" : "hover:bg-blue-50"
-                        } cursor-pointer w-full`}
+                        className={`transition-all duration-200 ${isDarkMode ? "hover:bg-[#2D2E33]" : "hover:bg-blue-50"
+                          } cursor-pointer w-full`}
                         onClick={() => handleRegionChange(region)}>
                         <div
-                          className={`px-3 py-2 text-[13px] font-medium ${
-                            selectedRegion === region
+                          className={`px-3 py-2 text-[13px] font-medium ${selectedRegion === region
                               ? "text-white bg-gradient-to-r from-[#4169E1] to-[#5B8BF7]"
                               : isDarkMode
-                              ? "text-[#C5C5C5]"
-                              : "text-[#2b2d2e]"
-                          }`}>
+                                ? "text-[#C5C5C5]"
+                                : "text-[#2b2d2e]"
+                            }`}>
                           {region}
                         </div>
                       </div>
@@ -1045,13 +1020,11 @@ const Navbar = () => {
 
                   <div
                     onClick={() => navigate("/dashboard")}
-                    className={`flex flex-col items-center h-10 rounded-lg justify-center px-3 cursor-pointer transition-all duration-200 ${
-                      isDarkMode ? "hover:bg-[#2D2E33]" : "hover:bg-blue-100"
-                    }`}>
-                    <span
-                      className={`text-[16px] font-bold flex gap-1 ${
-                        isDarkMode ? "text-[#FF532A]" : "text-[#FF532A]"
+                    className={`flex flex-col items-center h-10 rounded-lg justify-center px-3 cursor-pointer transition-all duration-200 ${isDarkMode ? "hover:bg-[#2D2E33]" : "hover:bg-blue-100"
                       }`}>
+                    <span
+                      className={`text-[16px] font-bold flex gap-1 ${isDarkMode ? "text-[#FF532A]" : "text-[#FF532A]"
+                        }`}>
                       {/* <img src={unoCoin} alt="unocoin" width={18} height={18} /> */} $
                       {user?.stats?.portfolio.toFixed(2).toLocaleString()}
                     </span>
@@ -1098,13 +1071,11 @@ const Navbar = () => {
 
                     <div
                       onClick={() => navigate("/dashboard")}
-                      className={`flex flex-col items-center h-10 rounded-lg justify-center px-3 cursor-pointer transition-all duration-200 ${
-                        isDarkMode ? "hover:bg-[#2D2E33]" : "hover:bg-blue-100"
-                      }`}>
-                      <span
-                        className={`text-[16px] font-bold flex gap-1 ${
-                          isDarkMode ? "text-[#FF532A]" : "text-[#FF532A]"
+                      className={`flex flex-col items-center h-10 rounded-lg justify-center px-3 cursor-pointer transition-all duration-200 ${isDarkMode ? "hover:bg-[#2D2E33]" : "hover:bg-blue-100"
                         }`}>
+                      <span
+                        className={`text-[16px] font-bold flex gap-1 ${isDarkMode ? "text-[#FF532A]" : "text-[#FF532A]"
+                          }`}>
                         {/* <img
                           src={unoCoin}
                           alt="unocoin"
@@ -1124,11 +1095,9 @@ const Navbar = () => {
                   <div className="relative">
                     <div
                       ref={profileButtonRef}
-                      className={`w-[38px] h-[38px] transition-all duration-300 hover:scale-110 ${
-                        isDarkMode ? "bg-[#2D2E33]" : "bg-blue-100"
-                      } rounded-full cursor-pointer border ${
-                        isDarkMode ? "border-zinc-700" : "border-blue-200"
-                      } flex items-center justify-center overflow-hidden`}
+                      className={`w-[38px] h-[38px] transition-all duration-300 hover:scale-110 ${isDarkMode ? "bg-[#2D2E33]" : "bg-blue-100"
+                        } rounded-full cursor-pointer border ${isDarkMode ? "border-zinc-700" : "border-blue-200"
+                        } flex items-center justify-center overflow-hidden`}
                       onClick={handleProfileClick}>
                       {user?.user?.profileImage ? (
                         <img
@@ -1138,9 +1107,8 @@ const Navbar = () => {
                         />
                       ) : (
                         <span
-                          className={`font-bold ${
-                            isDarkMode ? "text-white" : "text-[#4169E1]"
-                          }`}>
+                          className={`font-bold ${isDarkMode ? "text-white" : "text-[#4169E1]"
+                            }`}>
                           {user?.user?.name?.charAt(0).toUpperCase()}
                         </span>
                       )}
@@ -1150,83 +1118,73 @@ const Navbar = () => {
                     {showProfileMenu && (
                       <div
                         ref={profileMenuRef}
-                        className={`fixed right-auto mt-2 w-[170px] ${
-                          isDarkMode
+                        className={`fixed right-auto mt-2 w-[170px] ${isDarkMode
                             ? "bg-[#232429] text-[#C5C5C5]"
                             : "bg-white"
-                        } rounded-lg shadow-xl py-0 z-[1000] overflow-visible border ${
-                          isDarkMode ? "border-zinc-700" : "border-gray-200"
-                        } transition-all duration-300`}
+                          } rounded-lg shadow-xl py-0 z-[1000] overflow-visible border ${isDarkMode ? "border-zinc-700" : "border-gray-200"
+                          } transition-all duration-300`}
                         style={{
                           top: profileButtonRef.current
                             ? profileButtonRef.current.getBoundingClientRect()
-                                .bottom + 5
+                              .bottom + 5
                             : "auto",
                           right: profileButtonRef.current
                             ? window.innerWidth -
-                              profileButtonRef.current.getBoundingClientRect()
-                                .right
+                            profileButtonRef.current.getBoundingClientRect()
+                              .right
                             : "auto",
                           maxHeight: "calc(100vh - 150px)",
                           overflowY: "auto",
                         }}>
                         {/* Profile dropdown menu items */}
                         <div
-                          className={`transition-all duration-200 ${
-                            isDarkMode
+                          className={`transition-all duration-200 ${isDarkMode
                               ? "hover:bg-[#2D2E33]"
                               : "hover:bg-blue-50"
-                          } cursor-pointer w-full`}
+                            } cursor-pointer w-full`}
                           onClick={() => handleMenuItemClick("profile")}>
                           <div
-                            className={`px-3 py-2.5 ${
-                              isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
-                            } text-[13px] font-medium flex items-center justify-left h-full`}>
+                            className={`px-3 py-2.5 ${isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
+                              } text-[13px] font-medium flex items-center justify-left h-full`}>
                             Dashboard
                           </div>
                         </div>
 
                         {/* Watchlist */}
                         <div
-                          className={`transition-all duration-200 ${
-                            isDarkMode
+                          className={`transition-all duration-200 ${isDarkMode
                               ? "hover:bg-[#2D2E33]"
                               : "hover:bg-blue-50"
-                          } cursor-pointer w-full`}
+                            } cursor-pointer w-full`}
                           onClick={() => handleMenuItemClick("bookmarks")}>
                           <div
-                            className={`px-3 py-2.5 ${
-                              isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
-                            } text-[13px] font-medium flex items-center justify-left h-full`}>
+                            className={`px-3 py-2.5 ${isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
+                              } text-[13px] font-medium flex items-center justify-left h-full`}>
                             Bookmarks
                           </div>
                         </div>
 
                         {/* Theme Toggle */}
                         <div
-                          className={`transition-all duration-200 ${
-                            isDarkMode
+                          className={`transition-all duration-200 ${isDarkMode
                               ? "hover:bg-[#2D2E33]"
                               : "hover:bg-blue-50"
-                          } cursor-pointer w-full`}
+                            } cursor-pointer w-full`}
                           onClick={() => dispatch(toggleTheme())}>
                           <div
-                            className={`px-3 py-2.5 ${
-                              isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
-                            } text-[13px] font-medium flex items-center justify-between h-full`}>
+                            className={`px-3 py-2.5 ${isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
+                              } text-[13px] font-medium flex items-center justify-between h-full`}>
                             <span>Dark Theme</span>
                             <div
-                              className={`w-8 h-4 ${
-                                isDarkMode
+                              className={`w-8 h-4 ${isDarkMode
                                   ? "bg-gradient-to-r from-[#4169E1] to-[#5B8BF7]"
                                   : "bg-gray-300"
-                              } rounded-full relative transition-all duration-300`}>
+                                } rounded-full relative transition-all duration-300`}>
                               <div
-                                className={`absolute w-3 h-3 rounded-full bg-white top-0.5 transition-transform ${
-                                  isDarkMode
+                                className={`absolute w-3 h-3 rounded-full bg-white top-0.5 transition-transform ${isDarkMode
                                     ? "translate-x-4"
                                     : "translate-x-0.5"
-                                }`}
+                                  }`}
                               />
                             </div>
                           </div>
@@ -1234,16 +1192,14 @@ const Navbar = () => {
 
                         {/* Terms of Use */}
                         <div
-                          className={`transition-all duration-200 ${
-                            isDarkMode
+                          className={`transition-all duration-200 ${isDarkMode
                               ? "hover:bg-[#2D2E33]"
                               : "hover:bg-blue-50"
-                          } cursor-pointer w-full`}
+                            } cursor-pointer w-full`}
                           onClick={() => handleMenuItemClick("terms")}>
                           <div
-                            className={`px-3 py-2.5 ${
-                              isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
-                            } text-[13px] font-medium flex items-center justify-left h-full`}>
+                            className={`px-3 py-2.5 ${isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
+                              } text-[13px] font-medium flex items-center justify-left h-full`}>
                             Terms of Use
                           </div>
                         </div>
@@ -1266,22 +1222,19 @@ const Navbar = () => {
 
                         {/* Spacer */}
                         <div
-                          className={`border-t ${
-                            isDarkMode ? "border-zinc-700" : "border-gray-200"
-                          }`}></div>
+                          className={`border-t ${isDarkMode ? "border-zinc-700" : "border-gray-200"
+                            }`}></div>
 
                         {/* Logout - Last item */}
                         <div
-                          className={`transition-all duration-200 ${
-                            isDarkMode
+                          className={`transition-all duration-200 ${isDarkMode
                               ? "hover:bg-[#2D2E33]"
                               : "hover:bg-blue-50"
-                          } cursor-pointer w-full`}
+                            } cursor-pointer w-full`}
                           onClick={handleLogout}>
                           <div
-                            className={`px-3 py-2.5 ${
-                              isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
-                            } text-[13px] font-medium flex items-center justify-left h-full`}>
+                            className={`px-3 py-2.5 ${isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
+                              } text-[13px] font-medium flex items-center justify-left h-full`}>
                             {isLoading ? (
                               <span className="flex items-center">
                                 <CircularProgress
@@ -1303,9 +1256,8 @@ const Navbar = () => {
                   <>
                     <button
                       onClick={handleLoginClick}
-                      className={`bg-transparent border border-[#FF532A] rounded-lg py-2 px-6 flex justify-center items-center text-[16px] transition-all duration-300 hover:bg-[#FF532A] hover:to-[#2FBAA3] hover:text-white hover:shadow-lg ${
-                        isDarkMode ? "text-[#ffff]" : "text-[#000]"
-                      }   `}>
+                      className={`bg-transparent border border-[#FF532A] rounded-lg py-2 px-6 flex justify-center items-center text-[16px] transition-all duration-300 hover:bg-[#FF532A] hover:to-[#2FBAA3] hover:text-white hover:shadow-lg ${isDarkMode ? "text-[#ffff]" : "text-[#000]"
+                        }   `}>
                       Login
                     </button>
                     {/* <button
@@ -1319,75 +1271,65 @@ const Navbar = () => {
                       <div
                         ref={settingsButtonRef}
                         onClick={handleSettingsClick}
-                        className={`w-[38px] h-[38px] transition-all duration-300 hover:scale-110 ${
-                          isDarkMode ? "bg-[#2D2E33]" : "bg-blue-100"
-                        } rounded-full cursor-pointer flex items-center justify-center overflow-hidden border ${
-                          isDarkMode ? "border-zinc-700" : "border-blue-200"
-                        }`}>
+                        className={`w-[38px] h-[38px] transition-all duration-300 hover:scale-110 ${isDarkMode ? "bg-[#2D2E33]" : "bg-blue-100"
+                          } rounded-full cursor-pointer flex items-center justify-center overflow-hidden border ${isDarkMode ? "border-zinc-700" : "border-blue-200"
+                          }`}>
                         <i className="ri-menu-line text-xl"></i>
                       </div>
 
                       {showSettingsMenu && (
                         <div
                           ref={settingsMenuRef}
-                          className={`fixed right-auto mt-2 w-[170px] ${
-                            isDarkMode
+                          className={`fixed right-auto mt-2 w-[170px] ${isDarkMode
                               ? "bg-[#232429] text-[#C5C5C5]"
                               : "bg-white"
-                          } rounded-lg shadow-xl py-0 z-[1000] overflow-visible border ${
-                            isDarkMode ? "border-zinc-700" : "border-gray-200"
-                          } transition-all duration-300`}
+                            } rounded-lg shadow-xl py-0 z-[1000] overflow-visible border ${isDarkMode ? "border-zinc-700" : "border-gray-200"
+                            } transition-all duration-300`}
                           style={{
                             top: settingsButtonRef.current
                               ? settingsButtonRef.current.getBoundingClientRect()
-                                  .bottom + 5
+                                .bottom + 5
                               : "auto",
                             right: settingsButtonRef.current
                               ? window.innerWidth -
-                                settingsButtonRef.current.getBoundingClientRect()
-                                  .right
+                              settingsButtonRef.current.getBoundingClientRect()
+                                .right
                               : "auto",
                           }}>
                           <div
-                            className={`transition-all duration-200 ${
-                              isDarkMode
+                            className={`transition-all duration-200 ${isDarkMode
                                 ? "hover:bg-[#2D2E33]"
                                 : "hover:bg-blue-50"
-                            } cursor-pointer w-full`}
+                              } cursor-pointer w-full`}
                             onClick={() => dispatch(toggleTheme())}>
                             <div
-                              className={`px-3 py-2.5 ${
-                                isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
-                              } text-[13px] font-medium flex items-center justify-between h-full`}>
+                              className={`px-3 py-2.5 ${isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
+                                } text-[13px] font-medium flex items-center justify-between h-full`}>
                               <span>Dark Theme</span>
                               <div
-                                className={`w-8 h-4 ${
-                                  isDarkMode
+                                className={`w-8 h-4 ${isDarkMode
                                     ? "bg-gradient-to-r from-[#4169E1] to-[#5B8BF7]"
                                     : "bg-gray-300"
-                                } rounded-full relative transition-all duration-300`}>
+                                  } rounded-full relative transition-all duration-300`}>
                                 <div
-                                  className={`absolute w-3 h-3 rounded-full bg-white top-0.5 transition-transform ${
-                                    isDarkMode
+                                  className={`absolute w-3 h-3 rounded-full bg-white top-0.5 transition-transform ${isDarkMode
                                       ? "translate-x-4"
                                       : "translate-x-0.5"
-                                  }`}
+                                    }`}
                                 />
                               </div>
                             </div>
                           </div>
 
                           <div
-                            className={`transition-all duration-200 ${
-                              isDarkMode
+                            className={`transition-all duration-200 ${isDarkMode
                                 ? "hover:bg-[#2D2E33]"
                                 : "hover:bg-blue-50"
-                            } cursor-pointer w-full`}
+                              } cursor-pointer w-full`}
                             onClick={() => handleMenuItemClick("terms")}>
                             <div
-                              className={`px-3 py-2.5 ${
-                                isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
-                              } text-[13px] font-medium flex items-center justify-left h-full`}>
+                              className={`px-3 py-2.5 ${isDarkMode ? "text-[#C5C5C5]" : "text-[#2b2d2e]"
+                                } text-[13px] font-medium flex items-center justify-left h-full`}>
                               Terms of Use
                             </div>
                           </div>
@@ -1429,17 +1371,14 @@ const Navbar = () => {
                         fontFamily:
                           "'IBMPlexSans', -apple-system, BlinkMacSystemFont, sans-serif",
                       }}
-                      className={`text-sm capitalize  px-2 whitespace-nowrap transition-all duration-300   ${
-                        selectedTab === category
-                          ? ` rounded-lg font-bold   ${
-                              isDarkMode ? "text-[#ffff]" : "text-[#000]"
-                            }`
-                          : `font-medium  rounded-lg ${
-                              isDarkMode
-                                ? "text-[#C5C5C5] hover:bg-[#2D2E33]"
-                                : "text-[#7E7E80] hover:text-[#000]"
-                            }`
-                      }`}
+                      className={`text-sm capitalize  px-2 whitespace-nowrap transition-all duration-300   ${selectedTab === category
+                          ? ` rounded-lg font-bold   ${isDarkMode ? "text-[#ffff]" : "text-[#000]"
+                          }`
+                          : `font-medium  rounded-lg ${isDarkMode
+                            ? "text-[#C5C5C5] hover:bg-[#2D2E33]"
+                            : "text-[#7E7E80] hover:text-[#000]"
+                          }`
+                        }`}
                       onClick={() => handleCategoryClick(category)}>
                       {category}
                     </button>
@@ -1460,17 +1399,15 @@ const Navbar = () => {
               <img
                 src={isDarkMode ? logoLight : logoDark}
                 alt="SOUNDBET"
-                className={`h-[28px] transition-all duration-300 ${
-                  logosLoaded ? "opacity-100" : "opacity-0"
-                }`}
+                className={`h-[28px] transition-all duration-300 ${logosLoaded ? "opacity-100" : "opacity-0"
+                  }`}
                 style={{ minWidth: "85px" }}
                 loading="eager"
               />
               {!logosLoaded && (
                 <div
-                  className={`absolute h-[28px] ${
-                    isDarkMode ? "bg-zinc-700" : "bg-gray-300"
-                  } rounded animate-pulse`}
+                  className={`absolute h-[28px] ${isDarkMode ? "bg-zinc-700" : "bg-gray-300"
+                    } rounded animate-pulse`}
                   style={{ minWidth: "85px" }}
                 />
               )}
@@ -1479,33 +1416,28 @@ const Navbar = () => {
               onClick={handleMobileMenuToggle}
               className="p-2 transition-all duration-300 hover:scale-110">
               <i
-                className={`ri-menu-line text-2xl ${
-                  isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
-                }`}></i>
+                className={`ri-menu-line text-2xl ${isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
+                  }`}></i>
             </button>
           </div>
 
           {/* Mobile Side Drawer */}
           <div
-            className={`fixed inset-0 z-[1000] transition-all duration-300 ${
-              isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-            }`}
+            className={`fixed inset-0 z-[1000] transition-all duration-300 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+              }`}
             onClick={closeMobileMenu}>
             {/* Dark Overlay */}
             <div
-              className={`absolute inset-0 ${
-                isDarkMode ? "bg-black/70" : "bg-black/50"
-              } transition-all duration-300`}></div>
+              className={`absolute inset-0 ${isDarkMode ? "bg-black/70" : "bg-black/50"
+                } transition-all duration-300`}></div>
 
             {/* Drawer */}
             <div
-              className={`absolute top-0 left-0 h-full w-[280px] ${
-                isDarkMode
+              className={`absolute top-0 left-0 h-full w-[280px] ${isDarkMode
                   ? "bg-gradient-to-b from-[#1A1B1E] to-[#2A2B32]"
                   : "bg-gradient-to-b from-white to-blue-50"
-              } transform transition-all duration-300 ease-out ${
-                isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-              } shadow-xl`}
+                } transform transition-all duration-300 ease-out ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+                } shadow-xl`}
               onClick={(e) => e.stopPropagation()}>
               {/* Logo and Menu header */}
               <div className="p-4 border-b border-gray-200">
@@ -1517,17 +1449,15 @@ const Navbar = () => {
                     <img
                       src={isDarkMode ? logoLight : logoDark}
                       alt="soundbet Logo"
-                      className={`h-8 transition-all duration-300 ${
-                        logosLoaded ? "opacity-100" : "opacity-0"
-                      }`}
+                      className={`h-8 transition-all duration-300 ${logosLoaded ? "opacity-100" : "opacity-0"
+                        }`}
                       style={{ minWidth: "90px" }}
                       loading="eager"
                     />
                     {!logosLoaded && (
                       <div
-                        className={`absolute h-8 ${
-                          isDarkMode ? "bg-zinc-700" : "bg-gray-300"
-                        } rounded animate-pulse`}
+                        className={`absolute h-8 ${isDarkMode ? "bg-zinc-700" : "bg-gray-300"
+                          } rounded animate-pulse`}
                         style={{ minWidth: "90px" }}
                       />
                     )}
@@ -1538,11 +1468,9 @@ const Navbar = () => {
                   // Show user info if logged in
                   <div className="flex items-center gap-3">
                     <div
-                      className={`w-10 h-10 transition-all duration-300 hover:scale-110 ${
-                        isDarkMode ? "bg-[#2D2E33]" : "bg-blue-100"
-                      } rounded-full flex items-center justify-center border ${
-                        isDarkMode ? "border-zinc-700" : "border-blue-200"
-                      }`}>
+                      className={`w-10 h-10 transition-all duration-300 hover:scale-110 ${isDarkMode ? "bg-[#2D2E33]" : "bg-blue-100"
+                        } rounded-full flex items-center justify-center border ${isDarkMode ? "border-zinc-700" : "border-blue-200"
+                        }`}>
                       {user?.user?.profileImage ? (
                         <img
                           src={user?.user?.profile_image}
@@ -1551,18 +1479,16 @@ const Navbar = () => {
                         />
                       ) : (
                         <span
-                          className={`text-lg font-bold ${
-                            isDarkMode ? "text-white" : "text-[#4169E1]"
-                          }`}>
+                          className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-[#4169E1]"
+                            }`}>
                           {user?.user?.name?.charAt(0)?.toUpperCase()}
                         </span>
                       )}
                     </div>
                     <div>
                       <div
-                        className={`font-medium ${
-                          isDarkMode ? "text-white" : "text-zinc-800"
-                        }`}>
+                        className={`font-medium ${isDarkMode ? "text-white" : "text-zinc-800"
+                          }`}>
                         {user?.user?.name}
                       </div>
                       <div className="text-sm text-gray-500">
@@ -1581,9 +1507,8 @@ const Navbar = () => {
                     </button> */}
                     <button
                       onClick={handleMobileLogin}
-                      className={`border border-[#FF532A] rounded-lg py-2.5 text-base transition-all duration-300 hover:bg-[#FF532A]  hover:to-[#2FBAA3] hover:text-white hover:shadow-lg w-full ${
-                        isDarkMode ? "text-[#fff]" : "text-[#000]"
-                      } `}>
+                      className={`border border-[#FF532A] rounded-lg py-2.5 text-base transition-all duration-300 hover:bg-[#FF532A]  hover:to-[#2FBAA3] hover:text-white hover:shadow-lg w-full ${isDarkMode ? "text-[#fff]" : "text-[#000]"
+                        } `}>
                       Login
                     </button>
                   </div>
@@ -1592,9 +1517,8 @@ const Navbar = () => {
 
               {/* Menu Items */}
               <div
-                className={`overflow-y-auto ${
-                  isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
-                }`}>
+                className={`overflow-y-auto ${isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
+                  }`}>
                 {/* Dashboard - Only show if logged in */}
                 {isLogin == true && (
                   <>
@@ -1603,11 +1527,10 @@ const Navbar = () => {
                         navigate("/dashboard");
                         closeMobileMenu();
                       }}
-                      className={`px-4 py-3 flex items-center gap-3 transition-all duration-200  ${
-                        isDarkMode
+                      className={`px-4 py-3 flex items-center gap-3 transition-all duration-200  ${isDarkMode
                           ? "text-white hover:bg-[#2D2E33]"
                           : "text-zinc-800 hover:bg-blue-100"
-                      } cursor-pointer`}>
+                        } cursor-pointer`}>
                       <i className="ri-user-line text-xl"></i>
                       <span>Dashboard</span>
                     </div>
@@ -1616,11 +1539,10 @@ const Navbar = () => {
                         navigate("/bookmarks");
                         closeMobileMenu();
                       }}
-                      className={`px-4 py-3 flex items-center gap-3 transition-all duration-200 ${
-                        isDarkMode
+                      className={`px-4 py-3 flex items-center gap-3 transition-all duration-200 ${isDarkMode
                           ? "text-white hover:bg-[#2D2E33]"
                           : "text-zinc-800 hover:bg-blue-100"
-                      } cursor-pointer`}>
+                        } cursor-pointer`}>
                       <i className="ri-bookmark-line text-xl"></i>
                       <span>Bookmarks</span>
                     </div>
@@ -1630,28 +1552,24 @@ const Navbar = () => {
                 {/* Common menu items */}
                 <div
                   onClick={() => dispatch(toggleTheme())}
-                  className={`px-4 py-3 flex items-center justify-between transition-all duration-200 ${
-                    isDarkMode
+                  className={`px-4 py-3 flex items-center justify-between transition-all duration-200 ${isDarkMode
                       ? "text-white hover:bg-[#2D2E33]"
                       : "text-zinc-800 hover:bg-blue-100"
-                  } cursor-pointer`}>
+                    } cursor-pointer`}>
                   <div className="flex items-center gap-3">
                     <i
-                      className={`${
-                        isDarkMode ? "ri-moon-line" : "ri-sun-line"
-                      } text-xl`}></i>
+                      className={`${isDarkMode ? "ri-moon-line" : "ri-sun-line"
+                        } text-xl`}></i>
                     <span>Dark Theme</span>
                   </div>
                   <div
-                    className={`w-8 h-4 ${
-                      isDarkMode
+                    className={`w-8 h-4 ${isDarkMode
                         ? "bg-gradient-to-r from-[#4169E1] to-[#5B8BF7]"
                         : "bg-gray-300"
-                    } rounded-full relative transition-all duration-300`}>
+                      } rounded-full relative transition-all duration-300`}>
                     <div
-                      className={`absolute w-3 h-3 rounded-full bg-white top-0.5 transition-transform ${
-                        isDarkMode ? "translate-x-4" : "translate-x-0.5"
-                      }`}
+                      className={`absolute w-3 h-3 rounded-full bg-white top-0.5 transition-transform ${isDarkMode ? "translate-x-4" : "translate-x-0.5"
+                        }`}
                     />
                   </div>
                 </div>
@@ -1662,11 +1580,10 @@ const Navbar = () => {
                     navigate("/terms");
                     closeMobileMenu();
                   }}
-                  className={`px-4 py-3 flex items-center gap-3 transition-all duration-200 ${
-                    isDarkMode
+                  className={`px-4 py-3 flex items-center gap-3 transition-all duration-200 ${isDarkMode
                       ? "text-white hover:bg-[#2D2E33]"
                       : "text-zinc-800 hover:bg-blue-100"
-                  } cursor-pointer`}>
+                    } cursor-pointer`}>
                   <i className="ri-file-list-line text-xl"></i>
                   <span>Terms of Use</span>
                 </div>
@@ -1721,13 +1638,11 @@ const Navbar = () => {
                 {isLogin == true && (
                   <div
                     onClick={handleLogout}
-                    className={`px-4 py-3 flex items-center gap-3 transition-all duration-200 ${
-                      isDarkMode
+                    className={`px-4 py-3 flex items-center gap-3 transition-all duration-200 ${isDarkMode
                         ? "text-white hover:bg-[#2D2E33]"
                         : "text-zinc-800 hover:bg-blue-100"
-                    } cursor-pointer border-t ${
-                      isDarkMode ? "border-zinc-700" : "border-gray-200"
-                    }`}>
+                      } cursor-pointer border-t ${isDarkMode ? "border-zinc-700" : "border-gray-200"
+                      }`}>
                     <i className="ri-logout-box-line text-xl"></i>
                     <span>
                       {isLoading ? (
@@ -1748,11 +1663,9 @@ const Navbar = () => {
 
                 {/* Footer Social Links */}
                 <div
-                  className={`px-4 py-4 ${
-                    isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
-                  } border-t ${
-                    isDarkMode ? "border-zinc-700" : "border-gray-200"
-                  } mt-4`}>
+                  className={`px-4 py-4 ${isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
+                    } border-t ${isDarkMode ? "border-zinc-700" : "border-gray-200"
+                    } mt-4`}>
                   <div className="text-sm font-medium mb-3">
                     Connect with us
                   </div>
@@ -1797,13 +1710,11 @@ const Navbar = () => {
                 {isLogin == true && (
                   <div
                     onClick={handleLogout}
-                    className={`px-4 py-3 flex items-center gap-3 transition-all duration-200 ${
-                      isDarkMode
+                    className={`px-4 py-3 flex items-center gap-3 transition-all duration-200 ${isDarkMode
                         ? "text-white hover:bg-[#2D2E33]"
                         : "text-zinc-800 hover:bg-blue-100"
-                    } cursor-pointer border-t ${
-                      isDarkMode ? "border-zinc-700" : "border-gray-200"
-                    }`}>
+                      } cursor-pointer border-t ${isDarkMode ? "border-zinc-700" : "border-gray-200"
+                      }`}>
                     <i className="ri-logout-box-line text-xl"></i>
                     <span>
                       {isLoading ? (
@@ -1839,11 +1750,10 @@ const Navbar = () => {
                 value={query}
                 type="text"
                 placeholder="Search Events & Market Trends"
-                className={`border w-[300px] h-10 rounded-lg transition-all duration-300 ${
-                  isDarkMode
+                className={`border w-[300px] h-10 rounded-lg transition-all duration-300 ${isDarkMode
                     ? "bg-[#141414] border-zinc-700 text-[#C5C5C5] focus:ring-2 focus:ring-[#5B8BF7]"
                     : "bg-white border-zinc-300 text-zinc-700 focus:ring-2 focus:ring-[#4169E1]"
-                } px-11 text-[16px] focus:outline-none focus:border-transparent shadow-sm`}
+                  } px-11 text-[16px] focus:outline-none focus:border-transparent shadow-sm`}
                 onFocus={() => {
                   if (searchResults.length > 0) {
                     setShowSearchResults(true);
@@ -1864,20 +1774,17 @@ const Navbar = () => {
               {showSearchResults && (
                 <div
                   ref={searchResultsRef}
-                  className={`w-[300px] absolute top-full mt-[6px] ${
-                    isDarkMode ? "bg-[#232429]" : "bg-white"
-                  } rounded-lg shadow-xl border ${
-                    isDarkMode ? "border-zinc-700" : "border-gray-200"
-                  } overflow-hidden z-50 transition-all duration-300`}>
+                  className={`w-[300px] absolute top-full mt-[6px] ${isDarkMode ? "bg-[#232429]" : "bg-white"
+                    } rounded-lg shadow-xl border ${isDarkMode ? "border-zinc-700" : "border-gray-200"
+                    } overflow-hidden z-50 transition-all duration-300`}>
                   {isSearching ? (
                     <div className="flex items-center justify-center py-10">
                       <div className="w-5 h-5 border-t-2 border-[#4169E1] rounded-full animate-spin"></div>
                     </div>
                   ) : searchResults.length === 0 ? (
                     <div
-                      className={`py-10 text-center ${
-                        isDarkMode ? "text-zinc-500" : "text-[#2b2d2e]/50"
-                      } text-sm font-normal`}>
+                      className={`py-10 text-center ${isDarkMode ? "text-zinc-500" : "text-[#2b2d2e]/50"
+                        } text-sm font-normal`}>
                       No results found
                     </div>
                   ) : (
@@ -1887,11 +1794,10 @@ const Navbar = () => {
                         {searchResults.map((event, index) => (
                           <div
                             key={event._id}
-                            className={`search-result-item flex items-center p-3 transition-all duration-200 ${
-                              isDarkMode
+                            className={`search-result-item flex items-center p-3 transition-all duration-200 ${isDarkMode
                                 ? "hover:bg-[#2D2E33]"
                                 : "hover:bg-blue-50"
-                            } cursor-pointer`}
+                              } cursor-pointer`}
                             onClick={() => {
                               navigate(`/market/details/${event._id}`);
                             }}
@@ -1918,11 +1824,10 @@ const Navbar = () => {
                             {/* Market name with ellipsis */}
                             <div className="flex-grow min-w-0">
                               <div
-                                className={`${
-                                  isDarkMode
+                                className={`${isDarkMode
                                     ? "text-[#C5C5C5]"
                                     : "text-[#2b2d2e]"
-                                } text-[14px] font-normal truncate`}>
+                                  } text-[14px] font-normal truncate`}>
                                 {event.event_title}
                               </div>
                             </div>
@@ -1951,11 +1856,10 @@ const Navbar = () => {
                                   return (
                                     <>
                                       <div
-                                        className={`text-[14px] font-bold ${
-                                          isDarkMode
+                                        className={`text-[14px] font-bold ${isDarkMode
                                             ? "text-white"
                                             : "text-[#4169E1]"
-                                        }`}>
+                                          }`}>
                                         {event.sub_markets[submarketIndex]
                                           .lastTradedYesPrice
                                           ? `${event.sub_markets[submarketIndex].lastTradedYesPrice}%`
@@ -1963,21 +1867,20 @@ const Navbar = () => {
                                       </div>
                                       {event.sub_markets[submarketIndex]
                                         ?.name && (
-                                        <div className="text-[11px] text-zinc-500 truncate">
-                                          {
-                                            event.sub_markets[submarketIndex]
-                                              .name
-                                          }
-                                        </div>
-                                      )}
+                                          <div className="text-[11px] text-zinc-500 truncate">
+                                            {
+                                              event.sub_markets[submarketIndex]
+                                                .name
+                                            }
+                                          </div>
+                                        )}
                                     </>
                                   );
                                 })()
                               ) : (
                                 <div
-                                  className={`text-[14px] font-bold ${
-                                    isDarkMode ? "text-white" : "text-[#4169E1]"
-                                  }`}>
+                                  className={`text-[14px] font-bold ${isDarkMode ? "text-white" : "text-[#4169E1]"
+                                    }`}>
                                   {event.sub_markets[0].lastTradedYesPrice
                                     ? `${event.sub_markets[0].lastTradedYesPrice}%`
                                     : "--"}

@@ -253,7 +253,7 @@ const LoginDialog = ({ open, onClose, onLoginSuccess }) => {
     try {
       const didToken = await magic.auth.loginWithEmailOTP({ email });
       const response = await fetch(
-        "https://api.uno.market/api/user/verifyotp",
+        "http://localhost:3007/api/user/verifyotp",
         {
           method: "POST",
           headers: {

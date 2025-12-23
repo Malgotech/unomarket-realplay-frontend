@@ -1,7 +1,7 @@
 import api from "./api";
 
 // Generalized function to fetch data from any endpoint
-let baseURL = "https://api.uno.market";
+let baseURL = "http://localhost:3007";
 
 export const fetchData = async (endpoint, data = null) => {
   try {

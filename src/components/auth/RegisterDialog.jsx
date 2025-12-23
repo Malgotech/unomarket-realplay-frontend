@@ -252,7 +252,7 @@ const RegisterDialog = ({ open, onClose }) => {
       // console.log("email :>> ", email);
       const didToken = await magic.auth.loginWithEmailOTP({ email });
       const response = await fetch(
-        "https://api.uno.market/api/user/verifyotp",
+        "http://localhost:3007/api/user/verifyotp",
         {
           method: "POST",
           headers: {
@@ -441,7 +441,7 @@ const RegisterDialog = ({ open, onClose }) => {
     try {
       await magic.oauth2.loginWithPopup({
         provider: "google",
-        redirectURI: "https://api.uno.market",
+        redirectURI: "http://localhost:3007",
         scope: ["profile", "email"],
       });
       const result = await magic.user.getInfo();

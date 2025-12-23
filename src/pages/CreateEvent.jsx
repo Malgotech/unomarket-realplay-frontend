@@ -98,7 +98,7 @@ const cancelOrder = async (orderId) => {
 const sellPosition = async (position, quantity) => {
   try {
     // Call the sell API endpoint
-    const response = await fetch("https://api.uno.market/orders/market/sell", {
+    const response = await fetch("http://localhost:3007/orders/market/sell", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

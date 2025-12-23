@@ -3,21 +3,27 @@ import like from "/like.svg";
 import upload from "/upload.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchData, postData } from "../services/apiServices";
-import { useSelector } from "react-redux"; // Import useSelector to access theme state
+import { useSelector } from "react-redux";
+import { useToast } from "../context/ToastContext";
 
 const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
   const navigate = useNavigate();
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const [followLoading, setFollowLoading] = useState(false);
+  const { userData } = useSelector((state) => state.user);
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [replies, setReplies] = useState([]);
   const [showReplies, setShowReplies] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(thoughtData?.likes || 0);
-  const theme = useSelector((state) => state.theme.value); // Get current theme
-  const isDarkMode = theme === "dark"; // Check if dark mode is active
-
+  const theme = useSelector((state) => state.theme.value);
+  const isDarkMode = theme === "dark";
+  const { showSuccessToast, showErrorToast } = useToast();
+  const [isFollowing, setIsFollowing] = useState(false);
+  const isOwnPost = userData?._id === thoughtData?.user?._id;
   useEffect(() => {
-    // Set initial like count and status
+
     setLikeCount(thoughtData?.likes || 0);
     setIsLiked(thoughtData?.hasUserLiked || false);
   }, [thoughtData]);
@@ -44,7 +50,6 @@ const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
         parentId: thoughtData._id,
       };
 
-      // Add eventId if thought has an event
       if (thoughtData?.event?._id) {
         payload.eventId = thoughtData.event._id;
       }
@@ -53,17 +58,80 @@ const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
       if (response.success) {
         setReplyText("");
         setShowReplyInput(false);
-        // Refresh replies if they were already loaded
+
         if (showReplies) {
           fetchReplies(thoughtData._id);
         }
-        // Update reply count in parent
+
         if (thoughtData.onReplyAdded) {
           thoughtData.onReplyAdded();
         }
       }
     } catch (error) {
       console.error("Error posting reply:", error);
+    }
+  };
+
+  const handleFollow = async (e) => {
+    e.stopPropagation();
+    if (followLoading) return;
+
+    try {
+      setFollowLoading(true);
+
+      const res = await postData("api/user/followuser", {
+        followingId: thoughtData?.user?._id,
+      });
+
+      if (res.success) {
+        setIsFollowing(true);
+        showSuccessToast(res?.message || "Followed successfully");
+      } else {
+        showErrorToast(res?.message || "Failed to follow");
+      }
+    } catch (error) {
+      console.error("Follow error:", error);
+
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Failed to follow";
+
+      showErrorToast(errorMessage);
+    } finally {
+      setFollowLoading(false);
+    }
+  };
+
+
+  const handleUnfollow = async (e) => {
+    e.stopPropagation();
+    if (followLoading) return;
+
+    try {
+      setFollowLoading(true);
+
+      const res = await postData("api/user/unfollowuser", {
+        followingId: thoughtData?.user?._id,
+      });
+
+      if (res.success) {
+        setIsFollowing(false);
+        showSuccessToast(res?.message || "Unfollowed successfully");
+      } else {
+        showErrorToast(res?.message || "Failed to unfollow");
+      }
+    } catch (error) {
+      console.error("Unfollow error:", error);
+
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Failed to unfollow";
+
+      showErrorToast(errorMessage);
+    } finally {
+      setFollowLoading(false);
     }
   };
 
@@ -117,7 +185,7 @@ const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
   };
 
   // Use optional chaining to safely access nested properties
-  const username = thoughtData?.user?.name || "Anonymous";
+  const username = thoughtData?.user?.username || "Anonymous";
   const profileImage =
     thoughtData?.user?.profile_image || "https://placehold.co/80x80";
   const content = thoughtData?.content || "";
@@ -127,9 +195,8 @@ const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
     <>
       <div
         onClick={handleCardClick}
-        className={`p-5 flex gap-2 hover:cursor-pointer transition-colors ${
-          isNestedReply ? "ml-12" : ""
-        }`}
+        className={`p-5 flex gap-2 hover:cursor-pointer transition-colors ${isNestedReply ? "ml-12" : ""
+          }`}
       >
         <div className="w-full h-full flex flex-col justify-between">
           <div className="flex justify-between items-center mt-2">
@@ -142,16 +209,14 @@ const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
               <div className="">
                 <div className="flex items-center gap-3">
                   <h1
-                    className={` text-[15px] sm:text-[17px]  ${
-                      isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
-                    } text-lg font-semibold`}
+                    className={` text-[15px] sm:text-[17px]  ${isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
+                      } text-lg font-semibold`}
                   >
                     {username}
                   </h1>
                   <p
-                    className={`text-[12px] sm:text-[14px] ${
-                      isDarkMode ? "text-[#C5C5C5]/50" : "text-zinc-800/50"
-                    } text-xs font-semibold`}
+                    className={`text-[12px] sm:text-[14px] ${isDarkMode ? "text-[#C5C5C5]/50" : "text-zinc-800/50"
+                      } text-xs font-semibold`}
                   >
                     {thoughtData.createdAt && formatDate(thoughtData.createdAt)}
                   </p>
@@ -162,15 +227,38 @@ const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
                   </p>
                 )}
               </div>
+
             </div>
+            {isLogin && !isOwnPost && (
+              <button
+                onClick={isFollowing ? handleUnfollow : handleFollow}
+                disabled={followLoading}
+                className={`px-3 py-1 rounded text-sm font-semibold min-w-[90px]
+      flex items-center justify-center gap-2 transition-all
+      ${isFollowing
+                    ? "border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                    : "border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+                  }
+      ${followLoading ? "opacity-60 cursor-not-allowed" : ""}
+    `}
+              >
+                {followLoading ? (
+                  <>
+                    <span className="loader" />
+                    Following...
+                  </>
+                ) : (
+                  isFollowing ? "Unfollow" : "Follow"
+                )}
+              </button>
+            )}
 
             {/* <i className={`w-4 h-4 ri-bookmark-line ${isDarkMode ? 'text-[#C5C5C5]/50' : ''}`}></i> */}
           </div>
 
           <p
-            className={`my-1 h-auto min-h-[44px] justify-start text-[13px] sm:text-[15px] ${
-              isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
-            } font-normal`}
+            className={`my-1 h-auto min-h-[44px] justify-start text-[13px] sm:text-[15px] ${isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
+              } font-normal`}
           >
             {content}
           </p>
@@ -200,23 +288,21 @@ const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
                       filter: isLiked
                         ? "invert(45%) sepia(85%) saturate(2913%) hue-rotate(197deg) brightness(98%) contrast(108%)"
                         : isDarkMode
-                        ? "invert(70%)"
-                        : "none",
+                          ? "invert(70%)"
+                          : "none",
                     }}
                   />
                   <span
-                    className={`${
-                      isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
-                    } text-sm font-semibold ${isLiked ? "text-blue-600" : ""}`}
+                    className={`${isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
+                      } text-sm font-semibold ${isLiked ? "text-blue-600" : ""}`}
                   >
                     {likeCount}
                   </span>
                 </button>
                 <i className="ri-chat-3-line"></i>
                 <span
-                  className={`${
-                    isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
-                  } text-sm font-semibold`}
+                  className={`${isDarkMode ? "text-[#C5C5C5]" : "text-zinc-800"
+                    } text-sm font-semibold`}
                 >
                   {replyCount}
                 </span>
@@ -254,22 +340,20 @@ const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
           {showReplyInput && (
             <div className="mt-4 reply-section">
               <div
-                className={`w-full px-4 py-3.5 rounded-[5px] outline outline-offset-[-1px] ${
-                  isDarkMode
-                    ? "outline-zinc-700 bg-zinc-800"
-                    : "outline-zinc-300"
-                } flex justify-between items-center gap-4`}
+                className={`w-full px-4 py-3.5 rounded-[5px] outline outline-offset-[-1px] ${isDarkMode
+                  ? "outline-zinc-700 bg-zinc-800"
+                  : "outline-zinc-300"
+                  } flex justify-between items-center gap-4`}
               >
                 <input
                   type="text"
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
                   placeholder="Write your reply..."
-                  className={`border-none border-transparent outline-0 w-full ${
-                    isDarkMode
-                      ? "bg-zinc-800 text-[#C5C5C5] placeholder-[#C5C5C5]/50"
-                      : "bg-transparent"
-                  }`}
+                  className={`border-none border-transparent outline-0 w-full ${isDarkMode
+                    ? "bg-zinc-800 text-[#C5C5C5] placeholder-[#C5C5C5]/50"
+                    : "bg-transparent"
+                    }`}
                   onClick={(e) => e.stopPropagation()}
                 />
                 <div
@@ -307,9 +391,8 @@ const ThoughtsCard = ({ thoughtData, isNestedReply = false }) => {
             />
             {index < replies.length - 1 && (
               <div
-                className={`h-px w-full ml-12 ${
-                  isDarkMode ? "bg-zinc-700" : "bg-gray-300"
-                } my-2`}
+                className={`h-px w-full ml-12 ${isDarkMode ? "bg-zinc-700" : "bg-gray-300"
+                  } my-2`}
               ></div>
             )}
           </React.Fragment>

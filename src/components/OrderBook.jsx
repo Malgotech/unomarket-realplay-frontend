@@ -747,7 +747,7 @@ const OrderBook = ({
       };
 
       const response = await fetch(
-        "https://api.uno.market/api/resolution/propose",
+        "http://localhost:3007/api/resolution/propose",
         {
           method: "POST",
           headers: {

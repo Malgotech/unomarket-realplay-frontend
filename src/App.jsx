@@ -61,6 +61,7 @@ import HomeSidebar from "./components/HomeSidebar";
 import EventsForm from "./pages/EventsForm";
 import NewEventComponent from "./pages/EventsForm";
 import CreateEvent from "./pages/CreateEvent";
+import ProfileNew from "./pages/ProfileNew";
 
 function App() {
   const theme = useSelector((state) => state.theme.value);
@@ -142,23 +143,23 @@ function App() {
                 />
               )} */}
 
-              {
-                isLogin && 
+            {
+              isLogin &&
 
-                 <HomeSidebar
-                  addPosition={addPosition}
-                  addBookmark={addBookmark}
-                  setAddBookMark={setAddBookMark}
-                  handlesidebar={handlesidebar}
-                  sidebar={sidebar}
-                />
+              <HomeSidebar
+                addPosition={addPosition}
+                addBookmark={addBookmark}
+                setAddBookMark={setAddBookMark}
+                handlesidebar={handlesidebar}
+                sidebar={sidebar}
+              />
 
-              }
+            }
 
-            
+
             <div
               className={`  w-full h-auto flex justify-center items-center 
-              ${sidebar ? `pl-0 ${isLogin && "xl:pl-[300px] "} `: "pl-[50px]"}
+              ${sidebar ? `pl-0 ${isLogin && "xl:pl-[300px] "} ` : "pl-[50px]"}
               transition-all duration-300`}>
               <Routes>
                 {/* Standard routes */}
@@ -220,6 +221,7 @@ function App() {
                 <Route path="/" element={<SharedLayout />}>
                   <Route path="activity" element={<ActivityContent />} />
                   <Route path="thoughts" element={<ThoughtsContent />} />
+                  <Route path="profile" element={<ProfileNew />} />
                   <Route
                     path="thoughts/latest"
                     element={<CommentaryContent />}

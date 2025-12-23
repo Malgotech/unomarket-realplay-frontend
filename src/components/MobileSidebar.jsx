@@ -7,8 +7,8 @@ const MobileSidebar = () => {
   const isDarkMode = theme === 'dark';
   const location = useLocation();
   const [activeItem, setActiveItem] = useState("home");
-      const isLogin = useSelector((state) => state.user.isLogin);
-  
+  const isLogin = useSelector((state) => state.user.isLogin);
+
 
   // Set active item based on current route
   useEffect(() => {
@@ -23,12 +23,12 @@ const MobileSidebar = () => {
     } else if (currentPath === '/activity') {
       setActiveItem('activity');
     }
-    
+
     // else if (currentPath === '/bookmarks') {
     //   setActiveItem('bookmark');
     // }
-    
-    else if (currentPath === '/dashboard') {
+
+    else if (currentPath === '/profile') {
       setActiveItem('profile');
     } else if (currentPath.startsWith('/thought/detail/')) {
       // For thought detail pages, highlight commentary since they're related to discussions
@@ -46,14 +46,14 @@ const MobileSidebar = () => {
     { id: "marketideas", icon: "/market-ideas.svg", label: "Market Ideas", path: "/thoughts/market-ideas" },
     { id: "activity", icon: "/Streamline Graph.svg", label: "Activity", path: "/activity" },
     // { id: "bookmark", icon: "/bookmarkIcon.svg", label: "Bookmark", path: "/bookmarks" },
-    { id: "profile", icon: "/profileIcon.svg", label: "Profile", path: "/dashboard" },
+    { id: "profile", icon: "/profileIcon.svg", label: "Profile", path: "/profile" },
   ];
 
   const handleMenuItemClick = (item, event) => {
     // Only check for bookmark or profile
     if ((item.id === "bookmark" || item.id === "profile")) {
       // Check login status (token or user in localStorage)
-     
+
       if (!isLogin) {
         event.preventDefault();
         window.dispatchEvent(new Event("open-login-dialog"));
@@ -65,7 +65,7 @@ const MobileSidebar = () => {
 
   // Only show on thoughts-related pages
   const shouldShowSidebar = () => {
-    const thoughtsPages = ['/thoughts', '/thoughts/latest', '/thoughts/market-ideas', '/activity', '/bookmarks', '/dashboard', '/thought/detail/'];
+    const thoughtsPages = ['/thoughts', '/thoughts/latest', '/thoughts/market-ideas', '/activity', '/bookmarks', '/profile', '/thought/detail/'];
     return thoughtsPages.some(page => location.pathname.startsWith(page));
   };
 
@@ -82,12 +82,12 @@ const MobileSidebar = () => {
               <Link
                 to={item.path}
                 className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 ${activeItem === item.id
-                    ? isDarkMode
-                      ? "text-blue-400 bg-blue-900/20"
-                      : "text-blue-600 bg-blue-50"
-                    : isDarkMode
-                      ? "text-[#C5C5C5] hover:text-[#C5C5C5]/80 hover:bg-zinc-800"
-                      : "text-zinc-800 hover:text-zinc-500 hover:bg-gray-100"
+                  ? isDarkMode
+                    ? "text-blue-400 bg-blue-900/20"
+                    : "text-blue-600 bg-blue-50"
+                  : isDarkMode
+                    ? "text-[#C5C5C5] hover:text-[#C5C5C5]/80 hover:bg-zinc-800"
+                    : "text-zinc-800 hover:text-zinc-500 hover:bg-gray-100"
                   }`}
                 onClick={(e) => handleMenuItemClick(item, e)}
                 title={item.label}
@@ -96,10 +96,10 @@ const MobileSidebar = () => {
                   src={item.icon}
                   alt={`${item.label} icon`}
                   className={`w-5 h-5 transition-all ${isDarkMode
-                      ? 'filter invert brightness-75 contrast-150'
-                      : activeItem === item.id
-                        ? 'filter brightness-0 saturate-100 invert-[37%] sepia-[92%] saturate-[2612%] hue-rotate-[217deg] brightness-[98%] contrast-[95%]'
-                        : ''
+                    ? 'filter invert brightness-75 contrast-150'
+                    : activeItem === item.id
+                      ? 'filter brightness-0 saturate-100 invert-[37%] sepia-[92%] saturate-[2612%] hue-rotate-[217deg] brightness-[98%] contrast-[95%]'
+                      : ''
                     }`}
                 />
               </Link>
